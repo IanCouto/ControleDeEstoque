@@ -742,9 +742,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 atualizaJson(estoque);
             }
         }
-        fornecedorTxt.setText("");
-        produtoTxt.setText("");
-        precoTxt.setText("");
+        fornecedorTxt.setText(""+Math.random());
+        produtoTxt.setText(""+Math.random());
+        precoTxt.setText(""+Math.random());
     }//GEN-LAST:event_adicionarProtudobuttonActionPerformed
 
     private void produtoTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_produtoTxtActionPerformed
@@ -860,6 +860,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     estoque.listaProdutos().get(i).setNome(nomeaux);
                     estoque.listaProdutos().get(i).setQuantidade(quantidadeaux);
                     estoque.listaProdutos().get(i).setValor(valoraux);
+                    break;
                 }
             }
         }
@@ -869,12 +870,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         atualizaJson(estoque);
     }//GEN-LAST:event_botaoAdicionarEdicaoActionPerformed
     public void limpaTabela(Estoque estoque, JTable tabela) {
-        int i = estoque.listaProdutos().size() - 1;
         DefaultTableModel model = (DefaultTableModel) tabela.getModel();
-        while (i != -1) {
-            model.removeRow(i);
-            i--;
-        }
+        for (; tabela.getRowCount() > 0; model.removeRow(tabela.getRowCount()-1));
     }
 
     public void imprimeTabela(Estoque estoque, JTable tabela) {
@@ -936,7 +933,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 TelaPrincipal tela = new TelaPrincipal();
                 tela.setExtendedState(MAXIMIZED_BOTH);
                 tela.setVisible(true);
-                System.out.println("Teló");
             }
         });
     }
