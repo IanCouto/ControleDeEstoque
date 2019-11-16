@@ -1,14 +1,12 @@
 /*
-Álvaro Domingues de Freitas     Matrícula: 201876007
-Arthur Rodrigues Fernandes      Matrícula: 201835005
-Augusto Castilho Medeiros       Matrícula: 201876044
-Ian Couto de Paula		Matrícula: 201876002
-Matheus Henrique Rubio		Matrícula: 201876036
+ Álvaro Domingues de Freitas     Matrícula: 201876007
+ Arthur Rodrigues Fernandes      Matrícula: 201835005
+ Augusto Castilho Medeiros       Matrícula: 201876044
+ Ian Couto de Paula		Matrícula: 201876002
+ Matheus Henrique Rubio		Matrícula: 201876036
  */
 package Interface;
 
-import java.awt.Frame;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import com.mycompany.aplicacao.Banco;
 import javax.swing.table.DefaultTableModel;
@@ -716,37 +714,50 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoRecuperaLixeiraActionPerformed
 
     private void adicionarProtudobuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarProtudobuttonActionPerformed
-        int j = 0;
-        for (int i = 0; i < (estoque.listaProdutos().size()); i++) {
-            if (produtoTxt.getText().equals(estoque.getProduto(i).getNome())) {
-                //estoque.getProduto(i).setQuantidade(estoque.getProduto(i).getQuantidade()+Integer.parseInt(quantidadeTxt.getSelectedItem().toString()));
-                JOptionPane.showMessageDialog(null, "Produto já cadastrado em sistema, favor alterar somente a quantidade.");
-                //atualizaTabela(jTable3, estoque);
-                j = 1;
-                break;
-            }
+        try {
+            adicionarProdutobuttonActionPerformed();
+        } catch (Exception e) {
         }
-        if (j == 0) {
-            if (produtoTxt.getText().equals("")) {
-                JOptionPane.showMessageDialog(null, "Insira um nome para o produto");
-            } else {
-                produto = new Produto(produtoTxt.getText(), Integer.parseInt(quantidadeTxt.getSelectedItem().toString()), Float.parseFloat(precoTxt.getText()), fornecedorTxt.getText(), estoque.listaProdutos().size() + 1);
-                estoque.adicionaProduto(produto);
-                String nome = estoque.getProduto(estoque.listaProdutos().size() - 1).getNome();
-                String fornecedor = estoque.getProduto(estoque.listaProdutos().size() - 1).getFornecedor();
-                Integer quantidade = estoque.getProduto(estoque.listaProdutos().size() - 1).getQuantidade();
-                Float preco = estoque.getProduto(estoque.listaProdutos().size() - 1).getValor();
-                Object[] row = {estoque.getProduto(estoque.listaProdutos().size() - 1).getId(), nome, fornecedor, quantidade, preco};
-                DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
-                model.addRow(row);
-                atualizaJson(estoque);
-            }
-        }
-        fornecedorTxt.setText(""+Math.random());
-        produtoTxt.setText(""+Math.random());
-        precoTxt.setText(""+Math.random());
     }//GEN-LAST:event_adicionarProtudobuttonActionPerformed
 
+    private void adicionarProdutobuttonActionPerformed() throws Exception {
+        for (int i = 0; i < (estoque.listaProdutos().size()); i++) {
+            if (produtoTxt.getText().equals(estoque.getProduto(i).getNome())) {
+                JOptionPane.showMessageDialog(null, "Produto já cadastrado em sistema, apenas altere a quantidade.");
+                throw new Exception();
+            }
+        }
+        if (produtoTxt.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "O campo Produto está vazio, preencha-o para prosseguir.");
+            throw new Exception();
+        } else if (fornecedorTxt.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "O campo fornecedor está vazio, preencha-o para prosseguir.");
+            throw new Exception();
+        } else if (precoTxt.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "O campo preço está vazio, preencha-o para prosseguir.");
+            throw new Exception();
+        } else {
+            for (int i = 0; i < precoTxt.getText().length(); i++) {
+                if ((precoTxt.getText().charAt(i) < "0".charAt(0) || precoTxt.getText().charAt(i) > "9".charAt(0)) && precoTxt.getText().charAt(i) != ".".charAt(0)) {
+                    JOptionPane.showMessageDialog(null, "O preço inserido possui formato inválido.\nExemplo de formato correto: 25.30");
+                    throw new Exception();
+                }
+            }
+            produto = new Produto(produtoTxt.getText(), Integer.parseInt(quantidadeTxt.getSelectedItem().toString()), Float.parseFloat(precoTxt.getText()), fornecedorTxt.getText(), estoque.listaProdutos().size() + 1);
+            estoque.adicionaProduto(produto);
+            String nome = estoque.getProduto(estoque.listaProdutos().size() - 1).getNome();
+            String fornecedor = estoque.getProduto(estoque.listaProdutos().size() - 1).getFornecedor();
+            Integer quantidade = estoque.getProduto(estoque.listaProdutos().size() - 1).getQuantidade();
+            Float preco = estoque.getProduto(estoque.listaProdutos().size() - 1).getValor();
+            Object[] row = {estoque.getProduto(estoque.listaProdutos().size() - 1).getId(), nome, fornecedor, quantidade, preco};
+            DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
+            model.addRow(row);
+            atualizaJson(estoque);
+        }
+        fornecedorTxt.setText("" + Math.random());
+        produtoTxt.setText("" + Math.random());
+        precoTxt.setText("" + Math.random());
+    }
     private void produtoTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_produtoTxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_produtoTxtActionPerformed
@@ -785,8 +796,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_vendaTxtActionPerformed
 
     private void registraVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registraVendaActionPerformed
-        
-        int confirm = JOptionPane.showConfirmDialog(null, "Deseja finalizar a venda?", "Venda", JOptionPane.OK_CANCEL_OPTION);
+        try {
+            registraVendaActionPerformed();
+        } catch (Exception ex) {
+        }
+    }//GEN-LAST:event_registraVendaActionPerformed
+    private void registraVendaActionPerformed()throws Exception{
+                int confirm = JOptionPane.showConfirmDialog(null, "Deseja finalizar a venda?", "Venda", JOptionPane.OK_CANCEL_OPTION);
         if (confirm == JOptionPane.OK_OPTION) {
             String prod = vendaTxt.getText();
             Integer qtd = Integer.parseInt(qtdVenda.getSelectedItem().toString());
@@ -794,7 +810,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 if (prod.equals(estoque.listaProdutos().get(i).getNome())) {
                     if (estoque.getProduto(i).getQuantidade() - qtd < 0) {
                         JOptionPane.showMessageDialog(precoTxt, "Quantidade em estoque insuficiente. A venda não pode ser concluida.");
-                        break;
+                        throw new Exception();
                     }
                     qtd = estoque.listaProdutos().get(i).getQuantidade() - qtd;
                     estoque.listaProdutos().get(i).setQuantidade(qtd);
@@ -805,8 +821,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             vendaTxt.setText("");
             atualizaJson(estoque);
         }
-    }//GEN-LAST:event_registraVendaActionPerformed
-
+    }
     private void botaoBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBuscarActionPerformed
         int k = 0;
         aux.limpaEstoque();
@@ -869,9 +884,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         limpaTabela(estoque, jTable5);
         atualizaJson(estoque);
     }//GEN-LAST:event_botaoAdicionarEdicaoActionPerformed
+
     public void limpaTabela(Estoque estoque, JTable tabela) {
         DefaultTableModel model = (DefaultTableModel) tabela.getModel();
-        for (; tabela.getRowCount() > 0; model.removeRow(tabela.getRowCount()-1));
+        for (; tabela.getRowCount() > 0; model.removeRow(tabela.getRowCount() - 1));
     }
 
     public void imprimeTabela(Estoque estoque, JTable tabela) {
