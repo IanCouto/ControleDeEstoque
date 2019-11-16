@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTable;
+import Interface.Botoes;
 
 public class TelaPrincipal extends javax.swing.JFrame {
 
@@ -706,14 +707,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void botaoRecuperaLixeiraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRecuperaLixeiraActionPerformed
-        int limpar;
-        limpar = JOptionPane.showConfirmDialog(null, "Deseja recuperar todo o conteúdo da lixeira e substituir pelo estoque?", "Limpar", JOptionPane.OK_CANCEL_OPTION);
-        if (limpar == JOptionPane.OK_OPTION) {
-            limpaTabela(estoque, jTable3);
-            estoque.recuperaLixo();
-            imprimeTabela(estoque, jTable3);
-            atualizaJson(estoque);
-        }
+        Botoes a = new Botoes();
+        a.recuperarDaLixeira(jTable3);
     }//GEN-LAST:event_botaoRecuperaLixeiraActionPerformed
 
     private void adicionarProtudobuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarProtudobuttonActionPerformed
@@ -913,7 +908,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         imprimeTabela(estoque, tabela);
     }
 
-    private void atualizaJson(Estoque estoque) {
+    public void atualizaJson(Estoque estoque) {
         Banco banco = new Banco(estoque);
         try {
             banco.escreveArquivo();
