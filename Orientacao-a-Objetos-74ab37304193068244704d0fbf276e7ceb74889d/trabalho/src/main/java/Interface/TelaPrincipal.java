@@ -712,73 +712,28 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoRecuperaLixeiraActionPerformed
 
     private void adicionarProtudobuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarProtudobuttonActionPerformed
+        Botoes a = new Botoes();
         try {
-            adicionarProdutobuttonActionPerformed();
+            a.adicionarProduto(jTable3, produtoTxt.getText(), fornecedorTxt.getText(), precoTxt.getText(), quantidadeTxt.getSelectedIndex()+1);
+            fornecedorTxt.setText("" + Math.random());
+            produtoTxt.setText("" + Math.random());
+            precoTxt.setText("" + Math.random());
         } catch (Exception e) {
         }
     }//GEN-LAST:event_adicionarProtudobuttonActionPerformed
 
-    private void adicionarProdutobuttonActionPerformed() throws Exception {
-        for (int i = 0; i < (estoque.listaProdutos().size()); i++) {
-            if (produtoTxt.getText().equals(estoque.getProduto(i).getNome())) {
-                JOptionPane.showMessageDialog(null, "Produto já cadastrado em sistema, apenas altere a quantidade.");
-                throw new Exception();
-            }
-        }
-        if (produtoTxt.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "O campo Produto está vazio, preencha-o para prosseguir.");
-            throw new Exception();
-        } else if (fornecedorTxt.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "O campo fornecedor está vazio, preencha-o para prosseguir.");
-            throw new Exception();
-        } else if (precoTxt.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "O campo preço está vazio, preencha-o para prosseguir.");
-            throw new Exception();
-        } else {
-            for (int i = 0; i < precoTxt.getText().length(); i++) {
-                if ((precoTxt.getText().charAt(i) < "0".charAt(0) || precoTxt.getText().charAt(i) > "9".charAt(0)) && precoTxt.getText().charAt(i) != ".".charAt(0)) {
-                    JOptionPane.showMessageDialog(null, "O preço inserido possui formato inválido.\nExemplo de formato correto: 25.30");
-                    throw new Exception();
-                }
-            }
-            produto = new Produto(produtoTxt.getText(), Integer.parseInt(quantidadeTxt.getSelectedItem().toString()), Float.parseFloat(precoTxt.getText()), fornecedorTxt.getText(), estoque.listaProdutos().size() + 1);
-            estoque.adicionaProduto(produto);
-            String nome = estoque.getProduto(estoque.listaProdutos().size() - 1).getNome();
-            String fornecedor = estoque.getProduto(estoque.listaProdutos().size() - 1).getFornecedor();
-            Integer quantidade = estoque.getProduto(estoque.listaProdutos().size() - 1).getQuantidade();
-            Float preco = estoque.getProduto(estoque.listaProdutos().size() - 1).getValor();
-            Object[] row = {estoque.getProduto(estoque.listaProdutos().size() - 1).getId(), nome, fornecedor, quantidade, preco};
-            DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
-            model.addRow(row);
-            atualizaJson(estoque);
-        }
-        fornecedorTxt.setText("" + Math.random());
-        produtoTxt.setText("" + Math.random());
-        precoTxt.setText("" + Math.random());
-    }
     private void produtoTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_produtoTxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_produtoTxtActionPerformed
 
     private void botaoLimpaEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLimpaEstoqueActionPerformed
-        int limpar;
-        limpar = JOptionPane.showConfirmDialog(null, "Deseja limpar todo o estoque?", "Limpar", JOptionPane.OK_CANCEL_OPTION);
-        //Ok = 0, Cancel = 2
-        if (limpar == JOptionPane.OK_OPTION) {
-            estoque.limpaLixo();
-            limpaTabela(estoque, jTable3);
-            estoque.limpaEstoque();
-            atualizaJson(estoque);
-        }
+        Botoes a = new Botoes();
+        a.limparEstoque(jTable3);
     }//GEN-LAST:event_botaoLimpaEstoqueActionPerformed
 
     private void botaoLimpaLixeiraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLimpaLixeiraActionPerformed
-        int limpar;
-        limpar = JOptionPane.showConfirmDialog(null, "Deseja limpar todo o lixo?", "Limpar", JOptionPane.OK_CANCEL_OPTION);
-        if (limpar == JOptionPane.OK_OPTION) {
-            estoque.limpaLixo();
-            atualizaJson(estoque);
-        }
+        Botoes a = new Botoes();
+        a.limpaLixeira();
     }//GEN-LAST:event_botaoLimpaLixeiraActionPerformed
 
     private void fornecedorTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fornecedorTxtActionPerformed
