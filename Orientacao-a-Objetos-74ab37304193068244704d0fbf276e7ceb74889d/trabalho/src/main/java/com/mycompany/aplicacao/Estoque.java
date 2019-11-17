@@ -8,7 +8,7 @@ Matheus Henrique Rubio		Matrícula: 201876036
 package com.mycompany.aplicacao;
 import java.util.ArrayList;
 /**
- * usada para criar um Estoque.
+ * Classe responsável por criar um estoque de produtos.
  */
 public class Estoque {
     private ArrayList<Produto> produtos;
@@ -19,14 +19,23 @@ public class Estoque {
         this.lixo = new ArrayList();
     }
 
+    /** Método que adiciona um produto ao estoque.
+     * @param produto Produto a ser adicionado ao estoque.
+     */
     public void adicionaProduto(Produto produto){
         produtos.add(produto);
     }
-   
+   /** Método que retorna o produto do índice correspondente
+     * @param indice Posição do produto na lista.
+     * @return Produto localizado no indice recebido como parâmetro.
+    */
     public Produto getProduto (int indice){
         return produtos.get(indice);
     }
-
+    
+    /** Método que remove o produto no estoque com o nome correspondente.
+     * @param nome Nome do produto a ser removido.
+     */
     public void removeProdutoNome(String nome){
         for(int i = 0; i < produtos.size(); i++ ){
             if(produtos.get(i).getNome().equals(nome)){
@@ -36,6 +45,9 @@ public class Estoque {
         }
     }
 
+    /** Método que remove os produtos no estoque com a quantidade correspondente.
+     * @param quantidade Parâmetro que verifica a quantidade de um produto no estoque.
+     */
     public void removeProdutoQuantidade(Integer quantidade){
         for(int i = 0; i < produtos.size(); i++ ){
             if(produtos.get(i).getQuantidade() == quantidade){

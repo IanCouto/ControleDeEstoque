@@ -704,8 +704,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         JOptionPane.showConfirmDialog(null, "jButton2");
     }//GEN-LAST:event_jButton2ActionPerformed
-    /**
-     * Função que restaura para o estoque todos os produtos que foram excluídos e permaneceram na lixeira.
+    /** Método que restaura para o estoque todos os produtos que foram excluídos e permaneceram na lixeira.
      */
     private void botaoRecuperaLixeiraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRecuperaLixeiraActionPerformed
         int limpar;
@@ -717,8 +716,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
             atualizaJson(estoque);
         }
     }//GEN-LAST:event_botaoRecuperaLixeiraActionPerformed
-    /**
-     * Função que adiciona o produto ao estoque.
+    
+    /**Método que adiciona o produto ao estoque. 
     */
     private void adicionarProtudobuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarProtudobuttonActionPerformed
         try {
@@ -727,6 +726,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_adicionarProtudobuttonActionPerformed
 
+    
+    /**Método que adiciona o produto ao estoque. 
+     * @throws Exception
+    */
     private void adicionarProtudobuttonActionPerformed () throws Exception{
         for (int i = 0; i < (estoque.listaProdutos().size()); i++) {
             if (produtoTxt.getText().equals(estoque.getProduto(i).getNome())) {
@@ -766,7 +769,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_produtoTxtActionPerformed
     /**
-     Função responsável por limpar todo o estoque.
+     Método responsável por limpar todo o estoque.
      */
     private void botaoLimpaEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLimpaEstoqueActionPerformed
         int limpar;
@@ -779,8 +782,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
             atualizaJson(estoque);
         }
     }//GEN-LAST:event_botaoLimpaEstoqueActionPerformed
+    
     /**
-     * Função que limpa todos os arquivos que se encontram na lixeira.
+     * Método que limpa todos os arquivos que se encontram na lixeira.
      */
     private void botaoLimpaLixeiraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLimpaLixeiraActionPerformed
         int limpar;
@@ -803,12 +807,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_vendaTxtActionPerformed
 
+    /** Método que registra a venda de um produto do estoque.
+     */
     private void registraVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registraVendaActionPerformed
         try {
             registraVendaActionPerformed();
         } catch (Exception ex) {
         }
     }//GEN-LAST:event_registraVendaActionPerformed
+    
+    /** Método que registra a venda de um produto do estoque.
+     * @throws Exception
+     */
     private void registraVendaActionPerformed()throws Exception{
                 int confirm = JOptionPane.showConfirmDialog(null, "Deseja finalizar a venda?", "Venda", JOptionPane.OK_CANCEL_OPTION);
         if (confirm == JOptionPane.OK_OPTION) {
@@ -830,6 +840,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
             atualizaJson(estoque);
         }
     }
+    
+    /**
+     * Método que realiza a busca de um determinado produto no estoque para ser disponibilizado para a edição     
+     */
     private void botaoBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBuscarActionPerformed
         int k = 0;
         aux.limpaEstoque();
@@ -865,6 +879,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         buscarQuantidade.setText("");
     }//GEN-LAST:event_botaoBuscarActionPerformed
 
+    /** Método que após realizada a edição do produto selecionado devolve ele ao estoque.
+    */
     private void botaoAdicionarEdicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAdicionarEdicaoActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTable5.getModel();
         String fornecedoraux;
@@ -893,11 +909,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
         atualizaJson(estoque);
     }//GEN-LAST:event_botaoAdicionarEdicaoActionPerformed
 
+    /** Método que limpa tabelas.
+     * @param estoque
+     * @param tabela
+     */
+    
+    @SuppressWarnings("empty-statement")
     public void limpaTabela(Estoque estoque, JTable tabela) {
         DefaultTableModel model = (DefaultTableModel) tabela.getModel();
         for (; tabela.getRowCount() > 0; model.removeRow(tabela.getRowCount() - 1));
     }
 
+    /** Método que imprime a tabela de acordo com os produtos disponíveis em estoque.
+     * @param estoque
+     * @param tabela
+     */
     public void imprimeTabela(Estoque estoque, JTable tabela) {
         DefaultTableModel model = (DefaultTableModel) tabela.getModel();
         int i = estoque.listaProdutos().size();
@@ -913,11 +939,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }
 
+    /** Método que atualiza uma tabela após alguma alteração no estoqu
+     * @param tabela
+     * @param estoque
+     */
     public void atualizaTabela(JTable tabela, Estoque estoque) {
         limpaTabela(estoque, tabela);
         imprimeTabela(estoque, tabela);
     }
 
+    /** Método que realiza a atualização do arquivo .Json
+     * @param estoque     
+     */
     public void atualizaJson(Estoque estoque) {
         Banco banco = new Banco(estoque);
         try {
@@ -927,6 +960,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }
 
+    /** Método principal do projeto
+     * @param args
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -953,6 +989,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         //</editor-fold>
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 TelaPrincipal tela = new TelaPrincipal();
                 tela.setExtendedState(MAXIMIZED_BOTH);
