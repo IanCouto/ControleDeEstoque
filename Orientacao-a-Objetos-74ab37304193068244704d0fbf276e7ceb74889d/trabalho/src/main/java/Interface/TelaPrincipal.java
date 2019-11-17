@@ -704,7 +704,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         JOptionPane.showConfirmDialog(null, "jButton2");
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    /**
+     * Função que restaura para o estoque todos os produtos que foram excluídos e permaneceram na lixeira.
+     */
     private void botaoRecuperaLixeiraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRecuperaLixeiraActionPerformed
         int limpar;
         limpar = JOptionPane.showConfirmDialog(null, "Deseja recuperar todo o conteúdo da lixeira e substituir pelo estoque?", "Limpar", JOptionPane.OK_CANCEL_OPTION);
@@ -715,7 +717,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
             atualizaJson(estoque);
         }
     }//GEN-LAST:event_botaoRecuperaLixeiraActionPerformed
-
+    /**
+     * Função que adiciona o produto ao estoque.
+    */
     private void adicionarProtudobuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarProtudobuttonActionPerformed
         try {
             adicionarProtudobuttonActionPerformed();
@@ -761,7 +765,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void produtoTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_produtoTxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_produtoTxtActionPerformed
-
+    /**
+     Função responsável por limpar todo o estoque.
+     */
     private void botaoLimpaEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLimpaEstoqueActionPerformed
         int limpar;
         limpar = JOptionPane.showConfirmDialog(null, "Deseja limpar todo o estoque?", "Limpar", JOptionPane.OK_CANCEL_OPTION);
@@ -773,7 +779,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
             atualizaJson(estoque);
         }
     }//GEN-LAST:event_botaoLimpaEstoqueActionPerformed
-
+    /**
+     * Função que limpa todos os arquivos que se encontram na lixeira.
+     */
     private void botaoLimpaLixeiraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLimpaLixeiraActionPerformed
         int limpar;
         limpar = JOptionPane.showConfirmDialog(null, "Deseja limpar todo o lixo?", "Limpar", JOptionPane.OK_CANCEL_OPTION);
