@@ -446,6 +446,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel1.setText("Buscar produto por Id:");
 
         buscaId.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        buscaId.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buscaIdKeyPressed(evt);
+            }
+        });
 
         botaoBuscar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         botaoBuscar.setText("Buscar");
@@ -454,13 +459,31 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 botaoBuscarActionPerformed(evt);
             }
         });
+        botaoBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                botaoBuscarKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                botaoBuscarKeyReleased(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Buscar produto por nome:");
 
         buscaNome.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        buscaNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buscaNomeKeyPressed(evt);
+            }
+        });
 
         buscarQuantidade.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        buscarQuantidade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buscarQuantidadeKeyPressed(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel11.setText("Buscar produto por quantidade:");
@@ -469,8 +492,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel12.setText("Buscar produto por preço:");
 
         buscarPreco.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        buscarPreco.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buscarPrecoKeyPressed(evt);
+            }
+        });
 
         buscarFornecedor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        buscarFornecedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buscarFornecedorKeyPressed(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel13.setText("Buscar produto por fornecedor:");
@@ -886,6 +919,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
      * Método que realiza a busca de um determinado produto no estoque para ser disponibilizado para a edição     
      */
     private void botaoBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBuscarActionPerformed
+        try {
+            botaoBuscarActionPerformed();
+        } catch (Exception ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_botaoBuscarActionPerformed
+    
+    private void botaoBuscarActionPerformed()throws Exception{
         int k = 0;
         aux.limpaEstoque();
         limpaTabela(aux, jTable5);
@@ -918,8 +959,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         buscarFornecedor.setText("");
         buscarPreco.setText("");
         buscarQuantidade.setText("");
-    }//GEN-LAST:event_botaoBuscarActionPerformed
-
+    }
+    
     /** Método que após realizada a edição do produto selecionado devolve ele ao estoque.
     */
     private void botaoAdicionarEdicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAdicionarEdicaoActionPerformed
@@ -1037,15 +1078,72 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_adicionarProtudobuttonActionPerformed
 
+    private void buscaNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscaNomeKeyPressed
+        if(java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))){
+            try {
+                botaoBuscarActionPerformed();
+            } catch (Exception ex) {
+            }   
+        }
+    }//GEN-LAST:event_buscaNomeKeyPressed
+
+    private void buscaIdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscaIdKeyPressed
+        if(java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))){
+            try {
+                botaoBuscarActionPerformed();
+            } catch (Exception ex) {
+            }   
+        }
+    }//GEN-LAST:event_buscaIdKeyPressed
+
+    private void buscarQuantidadeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarQuantidadeKeyPressed
+        if(java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))){
+            try {
+                botaoBuscarActionPerformed();
+            } catch (Exception ex) {
+            }   
+        }
+    }//GEN-LAST:event_buscarQuantidadeKeyPressed
+
+    private void buscarPrecoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarPrecoKeyPressed
+        if(java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))){
+            try {
+                botaoBuscarActionPerformed();
+            } catch (Exception ex) {
+            }   
+        }
+    }//GEN-LAST:event_buscarPrecoKeyPressed
+
+    private void buscarFornecedorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarFornecedorKeyPressed
+        if(java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))){
+            try {
+                botaoBuscarActionPerformed();
+            } catch (Exception ex) {
+            }   
+        }
+    }//GEN-LAST:event_buscarFornecedorKeyPressed
+
+    private void botaoBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoBuscarKeyReleased
+
+    }//GEN-LAST:event_botaoBuscarKeyReleased
+
+    private void botaoBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoBuscarKeyPressed
+        if(java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))){
+            try {
+                botaoBuscarActionPerformed();
+            } catch (Exception ex) {
+            }   
+        }
+    }//GEN-LAST:event_botaoBuscarKeyPressed
+
     /** Método que limpa tabelas.
      * @param estoque
      * @param tabela
      */
     
-    @SuppressWarnings("empty-statement")
-    public void limpaTabela(Estoque estoque, JTable tabela) {
-        DefaultTableModel model = (DefaultTableModel) tabela.getModel();
-        for (; tabela.getRowCount() > 0; model.removeRow(tabela.getRowCount() - 1));
+
+    public void limpaTabela(Estoque estoque, JTable tabela) {        
+        for (DefaultTableModel model = (DefaultTableModel) tabela.getModel(); tabela.getRowCount() > 0; model.removeRow(tabela.getRowCount() - 1));
     }
 
     /** Método que imprime a tabela de acordo com os produtos disponíveis em estoque.
