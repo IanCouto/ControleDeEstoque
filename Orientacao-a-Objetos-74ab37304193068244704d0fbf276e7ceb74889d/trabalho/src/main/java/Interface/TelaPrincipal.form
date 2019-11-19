@@ -168,7 +168,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" pref="676" max="32767" attributes="0"/>
+              <Component id="jTabbedPane1" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -1620,6 +1620,7 @@
               </Properties>
               <Events>
                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="buscaIdKeyPressed"/>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="buscaIdKeyReleased"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
@@ -1649,6 +1650,7 @@
               </Properties>
               <Events>
                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="buscarQuantidadeKeyPressed"/>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="buscarQuantidadeKeyReleased"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel11">
@@ -1674,7 +1676,9 @@
                 </Property>
               </Properties>
               <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buscarPrecoActionPerformed"/>
                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="buscarPrecoKeyPressed"/>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="buscarPrecoKeyReleased"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="buscarFornecedor">
@@ -1685,6 +1689,7 @@
               </Properties>
               <Events>
                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="buscarFornecedorKeyPressed"/>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="buscarFornecedorKeyReleased"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel13">

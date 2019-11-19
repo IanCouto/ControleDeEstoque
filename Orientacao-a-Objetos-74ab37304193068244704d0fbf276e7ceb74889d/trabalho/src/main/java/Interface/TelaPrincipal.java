@@ -459,6 +459,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 buscaIdKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                buscaIdKeyReleased(evt);
+            }
         });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -479,6 +482,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 buscarQuantidadeKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                buscarQuantidadeKeyReleased(evt);
+            }
         });
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -488,9 +494,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel12.setText("Buscar produto por preço:");
 
         buscarPreco.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        buscarPreco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarPrecoActionPerformed(evt);
+            }
+        });
         buscarPreco.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 buscarPrecoKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                buscarPrecoKeyReleased(evt);
             }
         });
 
@@ -498,6 +512,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         buscarFornecedor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 buscarFornecedorKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                buscarFornecedorKeyReleased(evt);
             }
         });
 
@@ -922,7 +939,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
 
@@ -1435,6 +1452,38 @@ public class TelaPrincipal extends javax.swing.JFrame {
             imprimeBuscaTabelaVendas();
         }
     }//GEN-LAST:event_buscaProdutoIdTxtKeyReleased
+
+    private void buscaIdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscaIdKeyReleased
+        try {
+            imprimeBuscaEstoque();
+        } catch (Exception ex) {
+        } 
+    }//GEN-LAST:event_buscaIdKeyReleased
+
+    private void buscarQuantidadeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarQuantidadeKeyReleased
+        try {
+            imprimeBuscaEstoque();
+        } catch (Exception ex) {
+        } 
+    }//GEN-LAST:event_buscarQuantidadeKeyReleased
+
+    private void buscarPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarPrecoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buscarPrecoActionPerformed
+
+    private void buscarPrecoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarPrecoKeyReleased
+        try {
+            imprimeBuscaEstoque();
+        } catch (Exception ex) {
+        } 
+    }//GEN-LAST:event_buscarPrecoKeyReleased
+
+    private void buscarFornecedorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarFornecedorKeyReleased
+        try {
+            imprimeBuscaEstoque();
+        } catch (Exception ex) {
+        } 
+    }//GEN-LAST:event_buscarFornecedorKeyReleased
 
     /** Método que limpa tabelas.
      * @param estoque
