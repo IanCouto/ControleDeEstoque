@@ -11,14 +11,13 @@ import java.util.ArrayList;
  * Classe responsável por criar um estoque de produtos.
  */
 public class Estoque {
-    private ArrayList<Produto> produtos;
-    private ArrayList<Produto> lixo;
+    private final ArrayList<Produto> produtos;
+    private final ArrayList<Produto> lixo;
 
     public Estoque() {
         this.produtos = new ArrayList();
         this.lixo = new ArrayList();
     }
-
     /** Método que adiciona um produto ao estoque.
      * @param produto Produto a ser adicionado ao estoque.
      */
@@ -78,5 +77,4 @@ public class Estoque {
     public ArrayList<Produto> listaProdutos(){
         return produtos;
     }
-    
 }

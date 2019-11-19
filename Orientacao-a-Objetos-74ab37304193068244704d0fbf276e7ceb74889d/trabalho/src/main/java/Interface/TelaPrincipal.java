@@ -11,18 +11,18 @@ import javax.swing.JOptionPane;
 import com.mycompany.aplicacao.Banco;
 import javax.swing.table.DefaultTableModel;
 import com.mycompany.aplicacao.Produto;
+import com.mycompany.aplicacao.ProdutoVendido;
 import com.mycompany.aplicacao.Estoque;
-import java.awt.Color;
-import java.awt.event.KeyEvent;
+import com.mycompany.aplicacao.RegistroDeVendas;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JTable;
 
 public class TelaPrincipal extends javax.swing.JFrame {
 
     Estoque estoque;
     Produto produto;
+    ProdutoVendido produtoVendido;
+    RegistroDeVendas listaProdutosVendidos;
     Estoque aux;
     private Object jDesktopPane;
     Banco banco;
@@ -34,6 +34,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         initComponents();
         estoque = new Estoque();
         produto = new Produto();
+        produtoVendido = new ProdutoVendido();
+        listaProdutosVendidos = new RegistroDeVendas();
         aux = new Estoque();
         banco = new Banco(estoque);
 
@@ -42,7 +44,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        imprimeTabela(estoque, jTable3);
+        imprimeTabela(estoque, jTableEstoque);
     }
 
     /**
@@ -64,7 +66,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jInternalFrame3 = new javax.swing.JInternalFrame();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        jTableEstoque = new javax.swing.JTable();
         botaoRecuperaLixeira = new javax.swing.JButton();
         botaoLimpaLixeira = new javax.swing.JButton();
         botaoLimpaEstoque = new javax.swing.JButton();
@@ -90,7 +92,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         buscarFornecedor = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
+        jTableEditarProduto = new javax.swing.JTable();
         botaoAdicionarEdicao = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -101,16 +103,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
         descontoReaisTxt = new javax.swing.JTextField();
         descontoPorcentagemTxt = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        quantidadeVenda = new javax.swing.JComboBox();
-        buscaProdutoIdTxt = new javax.swing.JTextField();
+        buscaProdutoIdTxt = new javax.swing.JComboBox();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTableRegistraVenda = new javax.swing.JTable();
         jTextField1 = new javax.swing.JTextField();
+        quantidadeVenda1 = new javax.swing.JComboBox();
         jInternalFrame4 = new javax.swing.JInternalFrame();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTable6 = new javax.swing.JTable();
+        jTableControleDeVendas = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         sobre = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -206,9 +208,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jInternalFrame3.setVisible(true);
 
-        jTable3.setAutoCreateRowSorter(true);
-        jTable3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        jTableEstoque.setAutoCreateRowSorter(true);
+        jTableEstoque.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTableEstoque.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -231,20 +233,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable3.setToolTipText("");
-        jTable3.setCellSelectionEnabled(true);
-        jTable3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTable3.setDoubleBuffered(true);
-        jTable3.setFillsViewportHeight(true);
-        jTable3.setFocusCycleRoot(true);
-        jTable3.setFocusTraversalPolicyProvider(true);
-        jTable3.setGridColor(new java.awt.Color(0, 0, 0));
-        jTable3.setInheritsPopupMenu(true);
-        jTable3.setNextFocusableComponent(this);
-        jTable3.setOpaque(false);
-        jTable3.setSurrendersFocusOnKeystroke(true);
-        jScrollPane3.setViewportView(jTable3);
-        jTable3.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jTableEstoque.setToolTipText("");
+        jTableEstoque.setCellSelectionEnabled(true);
+        jTableEstoque.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTableEstoque.setDoubleBuffered(true);
+        jTableEstoque.setFillsViewportHeight(true);
+        jTableEstoque.setFocusCycleRoot(true);
+        jTableEstoque.setFocusTraversalPolicyProvider(true);
+        jTableEstoque.setGridColor(new java.awt.Color(0, 0, 0));
+        jTableEstoque.setInheritsPopupMenu(true);
+        jTableEstoque.setNextFocusableComponent(this);
+        jTableEstoque.setOpaque(false);
+        jTableEstoque.setSurrendersFocusOnKeystroke(true);
+        jScrollPane3.setViewportView(jTableEstoque);
+        jTableEstoque.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
         botaoRecuperaLixeira.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         botaoRecuperaLixeira.setText("Recuperar da Lixeira");
@@ -502,9 +504,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel13.setText("Buscar produto por fornecedor:");
 
-        jTable5.setAutoCreateRowSorter(true);
-        jTable5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+        jTableEditarProduto.setAutoCreateRowSorter(true);
+        jTableEditarProduto.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTableEditarProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -527,20 +529,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable5.setToolTipText("");
-        jTable5.setCellSelectionEnabled(true);
-        jTable5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTable5.setDoubleBuffered(true);
-        jTable5.setFillsViewportHeight(true);
-        jTable5.setFocusCycleRoot(true);
-        jTable5.setFocusTraversalPolicyProvider(true);
-        jTable5.setGridColor(new java.awt.Color(0, 0, 0));
-        jTable5.setInheritsPopupMenu(true);
-        jTable5.setNextFocusableComponent(this);
-        jTable5.setOpaque(false);
-        jTable5.setSurrendersFocusOnKeystroke(true);
-        jScrollPane5.setViewportView(jTable5);
-        jTable5.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jTableEditarProduto.setToolTipText("");
+        jTableEditarProduto.setCellSelectionEnabled(true);
+        jTableEditarProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTableEditarProduto.setDoubleBuffered(true);
+        jTableEditarProduto.setFillsViewportHeight(true);
+        jTableEditarProduto.setFocusCycleRoot(true);
+        jTableEditarProduto.setFocusTraversalPolicyProvider(true);
+        jTableEditarProduto.setGridColor(new java.awt.Color(0, 0, 0));
+        jTableEditarProduto.setInheritsPopupMenu(true);
+        jTableEditarProduto.setNextFocusableComponent(this);
+        jTableEditarProduto.setOpaque(false);
+        jTableEditarProduto.setSurrendersFocusOnKeystroke(true);
+        jScrollPane5.setViewportView(jTableEditarProduto);
+        jTableEditarProduto.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
         botaoAdicionarEdicao.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         botaoAdicionarEdicao.setText("Adicionar Edição");
@@ -675,34 +677,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel8.setText("Quantidade:");
 
-        quantidadeVenda.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100", "101", "102", "103", "104", "105", "106", "107", "108", "109", "110", "111", "112", "113", "114", "115", "116", "117", "118", "119", "120", "121", "122", "123", "124", "125", "126", "127", "128", "129", "130", "131", "132", "133", "134", "135", "136", "137", "138", "139", "140", "141", "142", "143", "144", "145", "146", "147", "148", "149", "150", "151", "152", "153", "154", "155", "156", "157", "158", "159", "160", "161", "162", "163", "164", "165", "166", "167", "168", "169", "170", "171", "172", "173", "174", "175", "176", "177", "178", "179", "180", "181", "182", "183", "184", "185", "186", "187", "188", "189", "190", "191", "192", "193", "194", "195", "196", "197", "198", "199", "200", "201", "202", "203", "204", "205", "206", "207", "208", "209", "210", "211", "212", "213", "214", "215", "216", "217", "218", "219", "220", "221", "222", "223", "224", "225", "226", "227", "228", "229", "230", "231", "232", "233", "234", "235", "236", "237", "238", "239", "240", "241", "242", "243", "244", "245", "246", "247", "248", "249", "250", "251", "252", "253", "254", "255", "256", "257", "258", "259", "260", "261", "262", "263", "264", "265", "266", "267", "268", "269", "270", "271", "272", "273", "274", "275", "276", "277", "278", "279", "280", "281", "282", "283", "284", "285", "286", "287", "288", "289", "290", "291", "292", "293", "294", "295", "296", "297", "298", "299", "300", "301", "302", "303", "304", "305", "306", "307", "308", "309", "310", "311", "312", "313", "314", "315", "316", "317", "318", "319", "320", "321", "322", "323", "324", "325", "326", "327", "328", "329", "330", "331", "332", "333", "334", "335", "336", "337", "338", "339", "340", "341", "342", "343", "344", "345", "346", "347", "348", "349", "350", "351", "352", "353", "354", "355", "356", "357", "358", "359", "360", "361", "362", "363", "364", "365", "366", "367", "368", "369", "370", "371", "372", "373", "374", "375", "376", "377", "378", "379", "380", "381", "382", "383", "384", "385", "386", "387", "388", "389", "390", "391", "392", "393", "394", "395", "396", "397", "398", "399", "400", "401", "402", "403", "404", "405", "406", "407", "408", "409", "410", "411", "412", "413", "414", "415", "416", "417", "418", "419", "420", "421", "422", "423", "424", "425", "426", "427", "428", "429", "430", "431", "432", "433", "434", "435", "436", "437", "438", "439", "440", "441", "442", "443", "444", "445", "446", "447", "448", "449", "450", "451", "452", "453", "454", "455", "456", "457", "458", "459", "460", "461", "462", "463", "464", "465", "466", "467", "468", "469", "470", "471", "472", "473", "474", "475", "476", "477", "478", "479", "480", "481", "482", "483", "484", "485", "486", "487", "488", "489", "490", "491", "492", "493", "494", "495", "496", "497", "498", "499", "500", "501", "502", "503", "504", "505", "506", "507", "508", "509", "510", "511", "512", "513", "514", "515", "516", "517", "518", "519", "520", "521", "522", "523", "524", "525", "526", "527", "528", "529", "530", "531", "532", "533", "534", "535", "536", "537", "538", "539", "540", "541", "542", "543", "544", "545", "546", "547", "548", "549", "550", "551", "552", "553", "554", "555", "556", "557", "558", "559", "560", "561", "562", "563", "564", "565", "566", "567", "568", "569", "570", "571", "572", "573", "574", "575", "576", "577", "578", "579", "580", "581", "582", "583", "584", "585", "586", "587", "588", "589", "590", "591", "592", "593", "594", "595", "596", "597", "598", "599", "600", "601", "602", "603", "604", "605", "606", "607", "608", "609", "610", "611", "612", "613", "614", "615", "616", "617", "618", "619", "620", "621", "622", "623", "624", "625", "626", "627", "628", "629", "630", "631", "632", "633", "634", "635", "636", "637", "638", "639", "640", "641", "642", "643", "644", "645", "646", "647", "648", "649", "650", "651", "652", "653", "654", "655", "656", "657", "658", "659", "660", "661", "662", "663", "664", "665", "666", "667", "668", "669", "670", "671", "672", "673", "674", "675", "676", "677", "678", "679", "680", "681", "682", "683", "684", "685", "686", "687", "688", "689", "690", "691", "692", "693", "694", "695", "696", "697", "698", "699", "700", "701", "702", "703", "704", "705", "706", "707", "708", "709", "710", "711", "712", "713", "714", "715", "716", "717", "718", "719", "720", "721", "722", "723", "724", "725", "726", "727", "728", "729", "730", "731", "732", "733", "734", "735", "736", "737", "738", "739", "740", "741", "742", "743", "744", "745", "746", "747", "748", "749", "750", "751", "752", "753", "754", "755", "756", "757", "758", "759", "760", "761", "762", "763", "764", "765", "766", "767", "768", "769", "770", "771", "772", "773", "774", "775", "776", "777", "778", "779", "780", "781", "782", "783", "784", "785", "786", "787", "788", "789", "790", "791", "792", "793", "794", "795", "796", "797", "798", "799", "800", "801", "802", "803", "804", "805", "806", "807", "808", "809", "810", "811", "812", "813", "814", "815", "816", "817", "818", "819", "820", "821", "822", "823", "824", "825", "826", "827", "828", "829", "830", "831", "832", "833", "834", "835", "836", "837", "838", "839", "840", "841", "842", "843", "844", "845", "846", "847", "848", "849", "850", "851", "852", "853", "854", "855", "856", "857", "858", "859", "860", "861", "862", "863", "864", "865", "866", "867", "868", "869", "870", "871", "872", "873", "874", "875", "876", "877", "878", "879", "880", "881", "882", "883", "884", "885", "886", "887", "888", "889", "890", "891", "892", "893", "894", "895", "896", "897", "898", "899", "900", "901", "902", "903", "904", "905", "906", "907", "908", "909", "910", "911", "912", "913", "914", "915", "916", "917", "918", "919", "920", "921", "922", "923", "924", "925", "926", "927", "928", "929", "930", "931", "932", "933", "934", "935", "936", "937", "938", "939", "940", "941", "942", "943", "944", "945", "946", "947", "948", "949", "950", "951", "952", "953", "954", "955", "956", "957", "958", "959", "960", "961", "962", "963", "964", "965", "966", "967", "968", "969", "970", "971", "972", "973", "974", "975", "976", "977", "978", "979", "980", "981", "982", "983", "984", "985", "986", "987", "988", "989", "990", "991", "992", "993", "994", "995", "996", "997", "998", "999", "1000", " " }));
-        quantidadeVenda.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                quantidadeVendaKeyPressed(evt);
-            }
-        });
-
-        buscaProdutoIdTxt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        buscaProdutoIdTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscaProdutoIdTxtActionPerformed(evt);
-            }
-        });
+        buscaProdutoIdTxt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100", "101", "102", "103", "104", "105", "106", "107", "108", "109", "110", "111", "112", "113", "114", "115", "116", "117", "118", "119", "120", "121", "122", "123", "124", "125", "126", "127", "128", "129", "130", "131", "132", "133", "134", "135", "136", "137", "138", "139", "140", "141", "142", "143", "144", "145", "146", "147", "148", "149", "150", "151", "152", "153", "154", "155", "156", "157", "158", "159", "160", "161", "162", "163", "164", "165", "166", "167", "168", "169", "170", "171", "172", "173", "174", "175", "176", "177", "178", "179", "180", "181", "182", "183", "184", "185", "186", "187", "188", "189", "190", "191", "192", "193", "194", "195", "196", "197", "198", "199", "200", "201", "202", "203", "204", "205", "206", "207", "208", "209", "210", "211", "212", "213", "214", "215", "216", "217", "218", "219", "220", "221", "222", "223", "224", "225", "226", "227", "228", "229", "230", "231", "232", "233", "234", "235", "236", "237", "238", "239", "240", "241", "242", "243", "244", "245", "246", "247", "248", "249", "250", "251", "252", "253", "254", "255", "256", "257", "258", "259", "260", "261", "262", "263", "264", "265", "266", "267", "268", "269", "270", "271", "272", "273", "274", "275", "276", "277", "278", "279", "280", "281", "282", "283", "284", "285", "286", "287", "288", "289", "290", "291", "292", "293", "294", "295", "296", "297", "298", "299", "300", "301", "302", "303", "304", "305", "306", "307", "308", "309", "310", "311", "312", "313", "314", "315", "316", "317", "318", "319", "320", "321", "322", "323", "324", "325", "326", "327", "328", "329", "330", "331", "332", "333", "334", "335", "336", "337", "338", "339", "340", "341", "342", "343", "344", "345", "346", "347", "348", "349", "350", "351", "352", "353", "354", "355", "356", "357", "358", "359", "360", "361", "362", "363", "364", "365", "366", "367", "368", "369", "370", "371", "372", "373", "374", "375", "376", "377", "378", "379", "380", "381", "382", "383", "384", "385", "386", "387", "388", "389", "390", "391", "392", "393", "394", "395", "396", "397", "398", "399", "400", "401", "402", "403", "404", "405", "406", "407", "408", "409", "410", "411", "412", "413", "414", "415", "416", "417", "418", "419", "420", "421", "422", "423", "424", "425", "426", "427", "428", "429", "430", "431", "432", "433", "434", "435", "436", "437", "438", "439", "440", "441", "442", "443", "444", "445", "446", "447", "448", "449", "450", "451", "452", "453", "454", "455", "456", "457", "458", "459", "460", "461", "462", "463", "464", "465", "466", "467", "468", "469", "470", "471", "472", "473", "474", "475", "476", "477", "478", "479", "480", "481", "482", "483", "484", "485", "486", "487", "488", "489", "490", "491", "492", "493", "494", "495", "496", "497", "498", "499", "500", "501", "502", "503", "504", "505", "506", "507", "508", "509", "510", "511", "512", "513", "514", "515", "516", "517", "518", "519", "520", "521", "522", "523", "524", "525", "526", "527", "528", "529", "530", "531", "532", "533", "534", "535", "536", "537", "538", "539", "540", "541", "542", "543", "544", "545", "546", "547", "548", "549", "550", "551", "552", "553", "554", "555", "556", "557", "558", "559", "560", "561", "562", "563", "564", "565", "566", "567", "568", "569", "570", "571", "572", "573", "574", "575", "576", "577", "578", "579", "580", "581", "582", "583", "584", "585", "586", "587", "588", "589", "590", "591", "592", "593", "594", "595", "596", "597", "598", "599", "600", "601", "602", "603", "604", "605", "606", "607", "608", "609", "610", "611", "612", "613", "614", "615", "616", "617", "618", "619", "620", "621", "622", "623", "624", "625", "626", "627", "628", "629", "630", "631", "632", "633", "634", "635", "636", "637", "638", "639", "640", "641", "642", "643", "644", "645", "646", "647", "648", "649", "650", "651", "652", "653", "654", "655", "656", "657", "658", "659", "660", "661", "662", "663", "664", "665", "666", "667", "668", "669", "670", "671", "672", "673", "674", "675", "676", "677", "678", "679", "680", "681", "682", "683", "684", "685", "686", "687", "688", "689", "690", "691", "692", "693", "694", "695", "696", "697", "698", "699", "700", "701", "702", "703", "704", "705", "706", "707", "708", "709", "710", "711", "712", "713", "714", "715", "716", "717", "718", "719", "720", "721", "722", "723", "724", "725", "726", "727", "728", "729", "730", "731", "732", "733", "734", "735", "736", "737", "738", "739", "740", "741", "742", "743", "744", "745", "746", "747", "748", "749", "750", "751", "752", "753", "754", "755", "756", "757", "758", "759", "760", "761", "762", "763", "764", "765", "766", "767", "768", "769", "770", "771", "772", "773", "774", "775", "776", "777", "778", "779", "780", "781", "782", "783", "784", "785", "786", "787", "788", "789", "790", "791", "792", "793", "794", "795", "796", "797", "798", "799", "800", "801", "802", "803", "804", "805", "806", "807", "808", "809", "810", "811", "812", "813", "814", "815", "816", "817", "818", "819", "820", "821", "822", "823", "824", "825", "826", "827", "828", "829", "830", "831", "832", "833", "834", "835", "836", "837", "838", "839", "840", "841", "842", "843", "844", "845", "846", "847", "848", "849", "850", "851", "852", "853", "854", "855", "856", "857", "858", "859", "860", "861", "862", "863", "864", "865", "866", "867", "868", "869", "870", "871", "872", "873", "874", "875", "876", "877", "878", "879", "880", "881", "882", "883", "884", "885", "886", "887", "888", "889", "890", "891", "892", "893", "894", "895", "896", "897", "898", "899", "900", "901", "902", "903", "904", "905", "906", "907", "908", "909", "910", "911", "912", "913", "914", "915", "916", "917", "918", "919", "920", "921", "922", "923", "924", "925", "926", "927", "928", "929", "930", "931", "932", "933", "934", "935", "936", "937", "938", "939", "940", "941", "942", "943", "944", "945", "946", "947", "948", "949", "950", "951", "952", "953", "954", "955", "956", "957", "958", "959", "960", "961", "962", "963", "964", "965", "966", "967", "968", "969", "970", "971", "972", "973", "974", "975", "976", "977", "978", "979", "980", "981", "982", "983", "984", "985", "986", "987", "988", "989", "990", "991", "992", "993", "994", "995", "996", "997", "998", "999", "1000", " " }));
         buscaProdutoIdTxt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 buscaProdutoIdTxtKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                buscaProdutoIdTxtKeyReleased(evt);
             }
         });
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel14.setText("Id:");
 
-        jTable2.setAutoCreateRowSorter(true);
-        jTable2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTableRegistraVenda.setAutoCreateRowSorter(true);
+        jTableRegistraVenda.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTableRegistraVenda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -725,20 +712,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable2.setToolTipText("");
-        jTable2.setCellSelectionEnabled(true);
-        jTable2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTable2.setDoubleBuffered(true);
-        jTable2.setFillsViewportHeight(true);
-        jTable2.setFocusCycleRoot(true);
-        jTable2.setFocusTraversalPolicyProvider(true);
-        jTable2.setGridColor(new java.awt.Color(0, 0, 0));
-        jTable2.setInheritsPopupMenu(true);
-        jTable2.setNextFocusableComponent(this);
-        jTable2.setOpaque(false);
-        jTable2.setSurrendersFocusOnKeystroke(true);
-        jScrollPane7.setViewportView(jTable2);
-        jTable2.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jTableRegistraVenda.setToolTipText("");
+        jTableRegistraVenda.setCellSelectionEnabled(true);
+        jTableRegistraVenda.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTableRegistraVenda.setDoubleBuffered(true);
+        jTableRegistraVenda.setFillsViewportHeight(true);
+        jTableRegistraVenda.setFocusCycleRoot(true);
+        jTableRegistraVenda.setFocusTraversalPolicyProvider(true);
+        jTableRegistraVenda.setGridColor(new java.awt.Color(0, 0, 0));
+        jTableRegistraVenda.setInheritsPopupMenu(true);
+        jTableRegistraVenda.setNextFocusableComponent(this);
+        jTableRegistraVenda.setOpaque(false);
+        jTableRegistraVenda.setSurrendersFocusOnKeystroke(true);
+        jScrollPane7.setViewportView(jTableRegistraVenda);
+        jTableRegistraVenda.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
         jTextField1.setBackground(new java.awt.Color(214, 217, 233));
         jTextField1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
@@ -747,6 +734,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
+            }
+        });
+
+        quantidadeVenda1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100", "101", "102", "103", "104", "105", "106", "107", "108", "109", "110", "111", "112", "113", "114", "115", "116", "117", "118", "119", "120", "121", "122", "123", "124", "125", "126", "127", "128", "129", "130", "131", "132", "133", "134", "135", "136", "137", "138", "139", "140", "141", "142", "143", "144", "145", "146", "147", "148", "149", "150", "151", "152", "153", "154", "155", "156", "157", "158", "159", "160", "161", "162", "163", "164", "165", "166", "167", "168", "169", "170", "171", "172", "173", "174", "175", "176", "177", "178", "179", "180", "181", "182", "183", "184", "185", "186", "187", "188", "189", "190", "191", "192", "193", "194", "195", "196", "197", "198", "199", "200", "201", "202", "203", "204", "205", "206", "207", "208", "209", "210", "211", "212", "213", "214", "215", "216", "217", "218", "219", "220", "221", "222", "223", "224", "225", "226", "227", "228", "229", "230", "231", "232", "233", "234", "235", "236", "237", "238", "239", "240", "241", "242", "243", "244", "245", "246", "247", "248", "249", "250", "251", "252", "253", "254", "255", "256", "257", "258", "259", "260", "261", "262", "263", "264", "265", "266", "267", "268", "269", "270", "271", "272", "273", "274", "275", "276", "277", "278", "279", "280", "281", "282", "283", "284", "285", "286", "287", "288", "289", "290", "291", "292", "293", "294", "295", "296", "297", "298", "299", "300", "301", "302", "303", "304", "305", "306", "307", "308", "309", "310", "311", "312", "313", "314", "315", "316", "317", "318", "319", "320", "321", "322", "323", "324", "325", "326", "327", "328", "329", "330", "331", "332", "333", "334", "335", "336", "337", "338", "339", "340", "341", "342", "343", "344", "345", "346", "347", "348", "349", "350", "351", "352", "353", "354", "355", "356", "357", "358", "359", "360", "361", "362", "363", "364", "365", "366", "367", "368", "369", "370", "371", "372", "373", "374", "375", "376", "377", "378", "379", "380", "381", "382", "383", "384", "385", "386", "387", "388", "389", "390", "391", "392", "393", "394", "395", "396", "397", "398", "399", "400", "401", "402", "403", "404", "405", "406", "407", "408", "409", "410", "411", "412", "413", "414", "415", "416", "417", "418", "419", "420", "421", "422", "423", "424", "425", "426", "427", "428", "429", "430", "431", "432", "433", "434", "435", "436", "437", "438", "439", "440", "441", "442", "443", "444", "445", "446", "447", "448", "449", "450", "451", "452", "453", "454", "455", "456", "457", "458", "459", "460", "461", "462", "463", "464", "465", "466", "467", "468", "469", "470", "471", "472", "473", "474", "475", "476", "477", "478", "479", "480", "481", "482", "483", "484", "485", "486", "487", "488", "489", "490", "491", "492", "493", "494", "495", "496", "497", "498", "499", "500", "501", "502", "503", "504", "505", "506", "507", "508", "509", "510", "511", "512", "513", "514", "515", "516", "517", "518", "519", "520", "521", "522", "523", "524", "525", "526", "527", "528", "529", "530", "531", "532", "533", "534", "535", "536", "537", "538", "539", "540", "541", "542", "543", "544", "545", "546", "547", "548", "549", "550", "551", "552", "553", "554", "555", "556", "557", "558", "559", "560", "561", "562", "563", "564", "565", "566", "567", "568", "569", "570", "571", "572", "573", "574", "575", "576", "577", "578", "579", "580", "581", "582", "583", "584", "585", "586", "587", "588", "589", "590", "591", "592", "593", "594", "595", "596", "597", "598", "599", "600", "601", "602", "603", "604", "605", "606", "607", "608", "609", "610", "611", "612", "613", "614", "615", "616", "617", "618", "619", "620", "621", "622", "623", "624", "625", "626", "627", "628", "629", "630", "631", "632", "633", "634", "635", "636", "637", "638", "639", "640", "641", "642", "643", "644", "645", "646", "647", "648", "649", "650", "651", "652", "653", "654", "655", "656", "657", "658", "659", "660", "661", "662", "663", "664", "665", "666", "667", "668", "669", "670", "671", "672", "673", "674", "675", "676", "677", "678", "679", "680", "681", "682", "683", "684", "685", "686", "687", "688", "689", "690", "691", "692", "693", "694", "695", "696", "697", "698", "699", "700", "701", "702", "703", "704", "705", "706", "707", "708", "709", "710", "711", "712", "713", "714", "715", "716", "717", "718", "719", "720", "721", "722", "723", "724", "725", "726", "727", "728", "729", "730", "731", "732", "733", "734", "735", "736", "737", "738", "739", "740", "741", "742", "743", "744", "745", "746", "747", "748", "749", "750", "751", "752", "753", "754", "755", "756", "757", "758", "759", "760", "761", "762", "763", "764", "765", "766", "767", "768", "769", "770", "771", "772", "773", "774", "775", "776", "777", "778", "779", "780", "781", "782", "783", "784", "785", "786", "787", "788", "789", "790", "791", "792", "793", "794", "795", "796", "797", "798", "799", "800", "801", "802", "803", "804", "805", "806", "807", "808", "809", "810", "811", "812", "813", "814", "815", "816", "817", "818", "819", "820", "821", "822", "823", "824", "825", "826", "827", "828", "829", "830", "831", "832", "833", "834", "835", "836", "837", "838", "839", "840", "841", "842", "843", "844", "845", "846", "847", "848", "849", "850", "851", "852", "853", "854", "855", "856", "857", "858", "859", "860", "861", "862", "863", "864", "865", "866", "867", "868", "869", "870", "871", "872", "873", "874", "875", "876", "877", "878", "879", "880", "881", "882", "883", "884", "885", "886", "887", "888", "889", "890", "891", "892", "893", "894", "895", "896", "897", "898", "899", "900", "901", "902", "903", "904", "905", "906", "907", "908", "909", "910", "911", "912", "913", "914", "915", "916", "917", "918", "919", "920", "921", "922", "923", "924", "925", "926", "927", "928", "929", "930", "931", "932", "933", "934", "935", "936", "937", "938", "939", "940", "941", "942", "943", "944", "945", "946", "947", "948", "949", "950", "951", "952", "953", "954", "955", "956", "957", "958", "959", "960", "961", "962", "963", "964", "965", "966", "967", "968", "969", "970", "971", "972", "973", "974", "975", "976", "977", "978", "979", "980", "981", "982", "983", "984", "985", "986", "987", "988", "989", "990", "991", "992", "993", "994", "995", "996", "997", "998", "999", "1000", " " }));
+        quantidadeVenda1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                quantidadeVenda1KeyPressed(evt);
             }
         });
 
@@ -775,24 +769,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
                                         .addComponent(jLabel9))
                                     .addGap(12, 12, 12)
                                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                            .addComponent(jLabel10)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addComponent(descontoPorcentagemTxt)))))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(buscaProdutoIdTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)))
+                                        .addComponent(jLabel10)
+                                        .addComponent(descontoPorcentagemTxt))))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(registraVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(quantidadeVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(buscaProdutoIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(quantidadeVenda1, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane7))
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {buscaProdutoIdTxt, buscaProdutoNomeTxt, jTextField1, quantidadeVenda, registraVenda});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {buscaProdutoIdTxt, buscaProdutoNomeTxt, jTextField1, registraVenda});
 
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -803,19 +793,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(63, 63, 63)
-                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(buscaProdutoNomeTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                                .addGap(36, 36, 36)))
+                                .addGap(40, 40, 40))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(63, 63, 63)
+                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addComponent(buscaProdutoIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
+                        .addGap(4, 4, 4)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(quantidadeVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
+                        .addComponent(quantidadeVenda1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
                             .addComponent(jLabel9))
@@ -830,18 +820,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {buscaProdutoIdTxt, buscaProdutoNomeTxt, descontoPorcentagemTxt, descontoReaisTxt, jTextField1, quantidadeVenda, registraVenda});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {buscaProdutoIdTxt, buscaProdutoNomeTxt, descontoPorcentagemTxt, descontoReaisTxt, jTextField1, registraVenda});
 
-        quantidadeVenda.getAccessibleContext().setAccessibleName("");
-        quantidadeVenda.getAccessibleContext().setAccessibleDescription("");
+        buscaProdutoIdTxt.getAccessibleContext().setAccessibleName("");
+        buscaProdutoIdTxt.getAccessibleContext().setAccessibleDescription("");
 
         jTabbedPane1.addTab("Registrar venda", jPanel3);
 
         jInternalFrame4.setVisible(true);
 
-        jTable6.setAutoCreateRowSorter(true);
-        jTable6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jTable6.setModel(new javax.swing.table.DefaultTableModel(
+        jTableControleDeVendas.setAutoCreateRowSorter(true);
+        jTableControleDeVendas.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTableControleDeVendas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -864,20 +854,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable6.setToolTipText("");
-        jTable6.setCellSelectionEnabled(true);
-        jTable6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTable6.setDoubleBuffered(true);
-        jTable6.setFillsViewportHeight(true);
-        jTable6.setFocusCycleRoot(true);
-        jTable6.setFocusTraversalPolicyProvider(true);
-        jTable6.setGridColor(new java.awt.Color(0, 0, 0));
-        jTable6.setInheritsPopupMenu(true);
-        jTable6.setNextFocusableComponent(this);
-        jTable6.setOpaque(false);
-        jTable6.setSurrendersFocusOnKeystroke(true);
-        jScrollPane6.setViewportView(jTable6);
-        jTable6.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jTableControleDeVendas.setToolTipText("");
+        jTableControleDeVendas.setCellSelectionEnabled(true);
+        jTableControleDeVendas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTableControleDeVendas.setDoubleBuffered(true);
+        jTableControleDeVendas.setFillsViewportHeight(true);
+        jTableControleDeVendas.setFocusCycleRoot(true);
+        jTableControleDeVendas.setFocusTraversalPolicyProvider(true);
+        jTableControleDeVendas.setGridColor(new java.awt.Color(0, 0, 0));
+        jTableControleDeVendas.setInheritsPopupMenu(true);
+        jTableControleDeVendas.setNextFocusableComponent(this);
+        jTableControleDeVendas.setOpaque(false);
+        jTableControleDeVendas.setSurrendersFocusOnKeystroke(true);
+        jScrollPane6.setViewportView(jTableControleDeVendas);
+        jTableControleDeVendas.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -970,9 +960,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         int limpar;
         limpar = JOptionPane.showConfirmDialog(null, "Deseja recuperar todo o conteúdo da lixeira e substituir pelo estoque?", "Limpar", JOptionPane.OK_CANCEL_OPTION);
         if (limpar == JOptionPane.OK_OPTION) {
-            limpaTabela(jTable3);
+            limpaTabela(jTableEstoque);
             estoque.recuperaLixo();
-            imprimeTabela(estoque, jTable3);
+            imprimeTabela(estoque, jTableEstoque);
             atualizaJson(estoque);
         }
     }//GEN-LAST:event_botaoRecuperaLixeiraActionPerformed
@@ -1011,7 +1001,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             Integer quantidade = estoque.getProduto(estoque.listaProdutos().size() - 1).getQuantidade();
             Float preco = estoque.getProduto(estoque.listaProdutos().size() - 1).getValor();
             Object[] row = {estoque.getProduto(estoque.listaProdutos().size() - 1).getId(), nome, fornecedor, quantidade, preco};
-            DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
+            DefaultTableModel model = (DefaultTableModel) jTableEstoque.getModel();
             model.addRow(row);
             atualizaJson(estoque);
         }
@@ -1027,7 +1017,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         //Ok = 0, Cancel = 2
         if (limpar == JOptionPane.OK_OPTION) {
             estoque.limpaLixo();
-            limpaTabela(jTable3);
+            limpaTabela(jTableEstoque);
             estoque.limpaEstoque();
             atualizaJson(estoque);
         }
@@ -1066,24 +1056,57 @@ public class TelaPrincipal extends javax.swing.JFrame {
      * @throws Exception
      */
     private void registraVendaActionPerformed()throws Exception{
-        int confirm = JOptionPane.showConfirmDialog(null, "Deseja finalizar a venda?", "Venda", JOptionPane.OK_CANCEL_OPTION);     
+        int confirm = JOptionPane.showConfirmDialog(null, "Deseja finalizar a venda?", "Venda", JOptionPane.OK_CANCEL_OPTION);
+        DefaultTableModel model = (DefaultTableModel) jTableControleDeVendas.getModel();
         if (confirm == JOptionPane.OK_OPTION) {
-            String prod = buscaProdutoNomeTxt.getText();
-            Integer qtd = Integer.parseInt(quantidadeVenda.getSelectedItem().toString());
+            //variávei recebem o texto digitado
+            String nomeProduto = buscaProdutoNomeTxt.getText();
+            Integer id = buscaProdutoIdTxt.getSelectedIndex();
+            Integer quantidadeVendida = Integer.parseInt(buscaProdutoIdTxt.getSelectedItem().toString());
+            //verifica, para todo o estoque se o produto procurado existe
             for (int i = 0; i <= estoque.listaProdutos().size(); i++) {
-                if (prod.equals(estoque.listaProdutos().get(i).getNome())) {
-                    if (estoque.getProduto(i).getQuantidade() - qtd < 0) {
+                //se encontrar e a quantidade em estoque for maior que a vendida, a venda é concluida
+                if ((!nomeProduto.isEmpty() && estoque.getProduto(i).getNome().contains(nomeProduto) ||
+                        id.toString().contains(estoque.getProduto(i).getId().toString()))) {
+                    if (estoque.getProduto(i).getQuantidade() < quantidadeVendida) {
                         JOptionPane.showMessageDialog(precoTxt, "Quantidade em estoque insuficiente. A venda não pode ser concluida.");
                         throw new Exception();
                     }
-                    qtd = estoque.listaProdutos().get(i).getQuantidade() - qtd;
-                    estoque.listaProdutos().get(i).setQuantidade(qtd);
-                    atualizaTabela(jTable3, estoque);
+                    //atualiza a qauntidade em estoque e a tabela do estoque
+                    estoque.listaProdutos().get(i).setQuantidade(estoque.listaProdutos().get(i).getQuantidade() - quantidadeVendida);
+                    atualizaTabela(jTableEstoque, estoque);
+                    limpaTabela(jTableRegistraVenda);
+                    //cria produto vendido
+                    produtoVendido = new ProdutoVendido();
+                    produtoVendido.setNome(estoque.getProduto(i).getNome());
+                    produtoVendido.setId(estoque.getProduto(i).getId());
+                    produtoVendido.setQuantidade(quantidadeVendida);
+                    produtoVendido.setFornecedor(estoque.getProduto(i).getFornecedor());
+                    produtoVendido.setValor(estoque.getProduto(i).getValor());
+                    if(!descontoPorcentagemTxt.getText().equals("")){
+                        produtoVendido.setDescontoPorcentagem(Float.parseFloat(descontoPorcentagemTxt.getText()));
+                    }
+                    if(!descontoReaisTxt.getText().equals("")){
+                        produtoVendido.setDescontoReais(Float.parseFloat(descontoReaisTxt.getText()));
+                    }
+                    produtoVendido.setValorFinalVenda(quantidadeVendida*(produtoVendido.getValor()-produtoVendido.getDescontoReais()));
+                    //adiciona produto criado na lista de produtos vendidos
+                    listaProdutosVendidos.adicionaVenda(produtoVendido);
+                    //cria objeto linha com as informações do produto vendido
+                    Object[] row = {produtoVendido.getId(),
+                        produtoVendido.getNome(),
+                        produtoVendido.getFornecedor(),
+                        produtoVendido.getQuantidade(),
+                        produtoVendido.getValor(),
+                        produtoVendido.getDescontoPorcentagem(),
+                        produtoVendido.getDescontoReais(),
+                        produtoVendido.getValorFinalVenda()};
+                    model.addRow(row);
                     break;
                 }
             }
+            //Campos de busca voltam a ser vazios
             buscaProdutoNomeTxt.setText("");
-            buscaProdutoIdTxt.setText("");
             descontoPorcentagemTxt.setText("");
             descontoReaisTxt.setText("");
             atualizaJson(estoque);
@@ -1094,8 +1117,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void imprimeBuscaEstoque()throws Exception{
         int k = 0;
         aux.limpaEstoque();
-        limpaTabela(jTable5);
-        DefaultTableModel model = (DefaultTableModel) jTable5.getModel();
+        limpaTabela(jTableEditarProduto);
+        DefaultTableModel model = (DefaultTableModel) jTableEditarProduto.getModel();
         for (int i = 0; i < estoque.listaProdutos().size(); i++) {
             if (!buscarFornecedor.getText().isEmpty() && estoque.getProduto(i).getFornecedor().contains(buscarFornecedor.getText())) {
                 k++;
@@ -1115,7 +1138,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
             if (k > 0) {
                 aux.adicionaProduto(estoque.getProduto(i));
                 k = 0;
-                Object[] row = {aux.getProduto(aux.listaProdutos().size() - 1).getId(), aux.getProduto(aux.listaProdutos().size() - 1).getNome(), aux.getProduto(aux.listaProdutos().size() - 1).getFornecedor(), aux.getProduto(aux.listaProdutos().size() - 1).getQuantidade(), aux.getProduto(aux.listaProdutos().size() - 1).getValor()};
+                Object[] row = {aux.getProduto(aux.listaProdutos().size() - 1).getId(),
+                    aux.getProduto(aux.listaProdutos().size() - 1).getNome(),
+                    aux.getProduto(aux.listaProdutos().size() - 1).getFornecedor(),
+                    aux.getProduto(aux.listaProdutos().size() - 1).getQuantidade(),
+                    aux.getProduto(aux.listaProdutos().size() - 1).getValor()};
                 model.addRow(row);
             }
         }
@@ -1124,7 +1151,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     /** Método que após realizada a edição do produto selecionado devolve ele ao estoque.
     */
     private void botaoAdicionarEdicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAdicionarEdicaoActionPerformed
-        DefaultTableModel model = (DefaultTableModel) jTable5.getModel();
+        DefaultTableModel model = (DefaultTableModel) jTableEditarProduto.getModel();
         String fornecedoraux;
         String nomeaux;
         Integer quantidadeaux;
@@ -1145,15 +1172,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 }
             }
         }
-        atualizaTabela(jTable3, estoque);
+        atualizaTabela(jTableEstoque, estoque);
         aux.limpaEstoque();
-        limpaTabela(jTable5);
+        limpaTabela(jTableEditarProduto);
         atualizaJson(estoque);
     }//GEN-LAST:event_botaoAdicionarEdicaoActionPerformed
-
-    private void buscaProdutoIdTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaProdutoIdTxtActionPerformed
-
-    }//GEN-LAST:event_buscaProdutoIdTxtActionPerformed
 
     private void jPanel2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel2KeyTyped
 
@@ -1283,10 +1306,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void imprimeBuscaTabelaVendas(){
         aux.limpaEstoque();
-        limpaTabela(jTable2);
-        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        limpaTabela(jTableRegistraVenda);
+        DefaultTableModel model = (DefaultTableModel) jTableRegistraVenda.getModel();
         for (int i = 0, k = 0; i < estoque.listaProdutos().size(); i++) {
-            if (!buscaProdutoIdTxt.getText().isEmpty() && estoque.getProduto(i).getId().toString().contains(buscaProdutoIdTxt.getText())) {
+            if (estoque.getProduto(i).getId().equals(buscaProdutoIdTxt.getSelectedIndex())) {
                 k++;
             }
             if (!buscaProdutoNomeTxt.getText().isEmpty() && estoque.getProduto(i).getNome().contains(buscaProdutoNomeTxt.getText())) {
@@ -1319,19 +1342,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 registraVendaActionPerformed();
             } catch (Exception ex) {
             }   
-        }else{
-            imprimeBuscaTabelaVendas();
         }
     }//GEN-LAST:event_buscaProdutoIdTxtKeyPressed
-
-    private void quantidadeVendaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_quantidadeVendaKeyPressed
-        if(java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))){
-            try {
-                registraVendaActionPerformed();
-            } catch (Exception ex) {
-            }   
-        }
-    }//GEN-LAST:event_quantidadeVendaKeyPressed
 
     private void descontoReaisTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_descontoReaisTxtKeyPressed
         if(java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))){
@@ -1371,17 +1383,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buscaProdutoNomeTxtKeyReleased
 
-    private void buscaProdutoIdTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscaProdutoIdTxtKeyReleased
-        if(java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))){
-            try {
-                registraVendaActionPerformed();
-            } catch (Exception ex) {
-            }   
-        }else{
-            imprimeBuscaTabelaVendas();
-        }
-    }//GEN-LAST:event_buscaProdutoIdTxtKeyReleased
-
     private void buscaNomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscaNomeKeyReleased
         try {
             imprimeBuscaEstoque();
@@ -1392,6 +1393,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void quantidadeVenda1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_quantidadeVenda1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_quantidadeVenda1KeyPressed
 
     /** Método que limpa tabelas.
      * @param estoque
@@ -1421,14 +1426,33 @@ public class TelaPrincipal extends javax.swing.JFrame {
             j++;
         }
     }
+    
+    public void imprimeTabela(RegistroDeVendas registroVendas, JTable tabela) {
+        DefaultTableModel model = (DefaultTableModel) tabela.getModel();
 
+        for (int i = estoque.listaProdutos().size(); i > 0; i++) {
+            Object[] row = {produtoVendido.getId(),
+                        produtoVendido.getNome(),produtoVendido.getFornecedor(),
+                        produtoVendido.getQuantidade(),
+                        produtoVendido.getValor(),
+                        produtoVendido.getDescontoPorcentagem(),
+                        produtoVendido.getDescontoReais(),
+                        produtoVendido.getValorFinalVenda()};
+            model.addRow(row);
+        }
+    }
+    
     /** Método que atualiza uma tabela após alguma alteração no estoqu
      * @param tabela
      * @param estoque
      */
-    public void atualizaTabela(JTable tabela, Estoque estoque) {
+    private void atualizaTabela(JTable tabela, Estoque estoque) {
         limpaTabela(tabela);
         imprimeTabela(estoque, tabela);
+    }
+    private void atualizaTabela(JTable tabela, RegistroDeVendas vendas) {
+        limpaTabela(tabela);
+        imprimeTabela(vendas, tabela);
     }
 
     /** Método que realiza a atualização do arquivo .Json
@@ -1490,7 +1514,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton botaoRecuperaLixeira;
     private javax.swing.JTextField buscaId;
     private javax.swing.JTextField buscaNome;
-    private javax.swing.JTextField buscaProdutoIdTxt;
+    private javax.swing.JComboBox buscaProdutoIdTxt;
     private javax.swing.JTextField buscaProdutoNomeTxt;
     private javax.swing.JTextField buscarFornecedor;
     private javax.swing.JTextField buscarPreco;
@@ -1531,16 +1555,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable5;
-    private javax.swing.JTable jTable6;
+    private javax.swing.JTable jTableControleDeVendas;
+    private javax.swing.JTable jTableEditarProduto;
+    private javax.swing.JTable jTableEstoque;
+    private javax.swing.JTable jTableRegistraVenda;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTextField precoTxt;
     private javax.swing.JTextField produtoTxt;
     private javax.swing.JComboBox<String> quantidadeTxt;
-    private javax.swing.JComboBox quantidadeVenda;
+    private javax.swing.JComboBox quantidadeVenda1;
     private javax.swing.JButton registraVenda;
     private javax.swing.JMenu sobre;
     // End of variables declaration//GEN-END:variables
