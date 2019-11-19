@@ -55,11 +55,16 @@ public class Estoque {
             }
         }
     }
-  
+    /**
+     * Método que limpa a lixeira.
+     */
     public void limpaLixo(){
         lixo.clear();
     }
 
+    /**
+     * Método que realiza a limpeza do estoque.
+     */
     public void limpaEstoque(){
         for (int i = 0; i < produtos.size(); i++) {
             lixo.add(getProduto(i));
@@ -67,6 +72,9 @@ public class Estoque {
         produtos.clear();
     }
     
+    /**
+     * Método que recupera pro estoque todo conteúdo que se encontra na lixeira.
+     */
     public void recuperaLixo(){
         produtos.clear();
         for (int i = 0; i < lixo.size(); i++) {
@@ -74,6 +82,9 @@ public class Estoque {
         }
     }
    
+    /** Método que retorna a lista de produtos.
+     * @return Lista de produtos
+     */
     public ArrayList<Produto> listaProdutos(){
         return produtos;
     }

@@ -26,6 +26,7 @@ public class Banco {
     private String json;
 
     /**
+     * Construtor da classe Banco
      * @param estoque - Recebe o estoque
      */
     public Banco(Estoque estoque) {

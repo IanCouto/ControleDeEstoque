@@ -28,7 +28,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     Banco banco;
 
     /**
-     * Creates new form Login
+     * Construtor da interface TelaPrincipal.
      */
     public TelaPrincipal() {
         initComponents();
@@ -946,6 +946,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método para mostrar a aba Sobre.
+     * @param evt - Evento que aciona a função.
+     */
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         Sobre a = new Sobre();
         a.setVisible(true);
@@ -963,7 +967,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         JOptionPane.showConfirmDialog(null, "jButton2");
     }//GEN-LAST:event_jButton2ActionPerformed
-    /** Método que restaura para o estoque todos os produtos que foram excluídos e permaneceram na lixeira.
+    /** 
+     * Método que restaura para o estoque todos os produtos que foram excluídos e permaneceram na lixeira.
      */
     private void botaoRecuperaLixeiraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRecuperaLixeiraActionPerformed
         int limpar;
@@ -977,7 +982,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoRecuperaLixeiraActionPerformed
     
     
-    /**Método que adiciona o produto ao estoque. 
+    /**
+     * Método que adiciona o produto ao estoque. 
      * @throws Exception 
     */
     private void adicionarProtudobuttonActionPerformed () throws Exception{
@@ -1017,8 +1023,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         fornecedorTxt.setText(""+Math.random());
         produtoTxt.setText(""+Math.random());
         precoTxt.setText(""+Math.random());
-    }    /**
-     Método responsável por limpar todo o estoque.
+    }    
+    /** 
+     * Método responsável por limpar todo o estoque.
      */
     private void botaoLimpaEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLimpaEstoqueActionPerformed
         int limpar;
@@ -1052,7 +1059,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_buscaProdutoNomeTxtActionPerformed
 
-    /** Método que registra a venda de um produto do estoque.
+    /** 
+     * Método que registra a venda de um produto do estoque.
      */
     private void registraVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registraVendaActionPerformed
         try {
@@ -1061,7 +1069,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_registraVendaActionPerformed
     
-    /** Método que registra a venda de um produto do estoque.
+    /** 
+     * Método que registra a venda de um produto do estoque.
      * @throws Exception
      */
     private void registraVendaActionPerformed()throws Exception{
@@ -1186,8 +1195,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }
     
-    /** Método que após realizada a edição do produto selecionado devolve ele ao estoque.
-    */
+    /** 
+     * Método que após realizada a edição do produto selecionado devolve ele ao estoque.
+     */
     private void botaoAdicionarEdicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAdicionarEdicaoActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTableEditarProduto.getModel();
         String fornecedoraux;
@@ -1347,7 +1357,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         limpaTabela(jTableRegistraVenda);
         DefaultTableModel model = (DefaultTableModel) jTableRegistraVenda.getModel();
         for (int i = 0, k = 0; i < estoque.listaProdutos().size(); i++) {
-            if (!buscaProdutoIdTxt.getText().isEmpty() && estoque.getProduto(i).getId().toString().contains(buscaProdutoIdTxt.getText())) {
+            if (!buscaProdutoIdTxt.getText().isEmpty() && estoque.getProduto(i).getId().toString().equals(buscaProdutoIdTxt.getText())) {
                 k++;
             }
             if (!buscaProdutoNomeTxt.getText().isEmpty() && estoque.getProduto(i).getNome().contains(buscaProdutoNomeTxt.getText())) {
@@ -1486,18 +1496,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_buscarFornecedorKeyReleased
 
     /** Método que limpa tabelas.
-     * @param estoque
-     * @param tabela
+     * @param tabela Tabela que será limpa
      */
-    
-
     public void limpaTabela(JTable tabela) {        
         for (DefaultTableModel model = (DefaultTableModel) tabela.getModel(); tabela.getRowCount() > 0; model.removeRow(tabela.getRowCount() - 1)){}
     }
 
     /** Método que imprime a tabela de acordo com os produtos disponíveis em estoque.
-     * @param estoque
-     * @param tabela
+     * @param estoque Estoque que será impresso na tabela.
+     * @param tabela Tabela que receberá os produtos do estoque.
      */
     public void imprimeTabela(Estoque estoque, JTable tabela) {
         DefaultTableModel model = (DefaultTableModel) tabela.getModel();
@@ -1514,6 +1521,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Método para imprimir uma tabela de acordo com o registro de vendas.
+     * @param registroVendas Registro de vendas que será impresso na tabela
+     * @param tabela Tabela que receberá todo o registro de vendas.
+     */
     public void imprimeTabela(RegistroDeVendas registroVendas, JTable tabela) {
         DefaultTableModel model = (DefaultTableModel) tabela.getModel();
 
@@ -1529,14 +1541,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }
     
-    /** Método que atualiza uma tabela após alguma alteração no estoqu
-     * @param tabela
-     * @param estoque
+    /** Método que atualiza uma tabela após alguma alteração no estoque.
+     * @param tabela Tabela que será atualizada.
+     * @param estoque Estoque que irá ser adicionado na tabela.
      */
     private void atualizaTabela(JTable tabela, Estoque estoque) {
         limpaTabela(tabela);
         imprimeTabela(estoque, tabela);
     }
+    
+    /**
+     * Método que atualiza uma tabela após alguma alteração no registro de vendas.
+     * @param tabela Tabela que será atualizada.
+     * @param vendas Registro de vendas que irá ser adicionado na tabela.
+     */
     private void atualizaTabela(JTable tabela, RegistroDeVendas vendas) {
         limpaTabela(tabela);
         imprimeTabela(vendas, tabela);
