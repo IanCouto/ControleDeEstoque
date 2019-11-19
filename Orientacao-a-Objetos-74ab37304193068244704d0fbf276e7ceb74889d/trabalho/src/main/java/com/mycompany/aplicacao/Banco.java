@@ -20,13 +20,14 @@ import java.io.IOException;
 public class Banco {
 
     Estoque tabela;
+    RegistroDeVendas tabela2;
     private Gson gson;
 
     // converte objetos Java para JSON
     private String json;
 
     /**
-     * Construtor da classe Banco
+     * Construtor da classe Banco caso seja estoque
      * @param estoque - Recebe o estoque
      */
     public Banco(Estoque estoque) {
@@ -35,15 +36,27 @@ public class Banco {
         gson = new Gson();
         json = gson.toJson(tabela);
     }
+    
+    /**
+     * Construtor da classe Banco caso seja lista de produtos vendidos
+     * @param listaProdutosVendidos - Recebe a lista de produtos vendidos 
+     */
+    public Banco(RegistroDeVendas listaProdutosVendidos) {
+        tabela2 = new RegistroDeVendas();
+        tabela2 = listaProdutosVendidos;
+        gson = new Gson();
+        json = gson.toJson(tabela2);
+    }
 
     /**
+     * @param x - Nome do arquivo ao qual se destina o banco de dados (estoque ou registroVendas)
      * @throws IOException - precaução para casos de erros de leitura de
      * arquivos
      */
-    public void escreveArquivo() throws IOException {
+    public void escreveArquivo(String x) throws IOException {
         try {
-            //Apenas no windows, tem q mudar qnd for pro Linux
-            FileWriter writer = new FileWriter("estoque.json");
+
+            FileWriter writer = new FileWriter(x+".json");
             writer.write(json);
             writer.close();
         } catch (IOException e) {
@@ -59,13 +72,25 @@ public class Banco {
      */
     public Estoque pegaArquivo() throws IOException {
         try {
-            //Apenas no windows, tem q mudar qnd for pro Linux
-            BufferedReader br = new BufferedReader(new FileReader("estoque.json"));
 
+            BufferedReader br = new BufferedReader(new FileReader("estoque.json"));
             tabela = gson.fromJson(br, Estoque.class);
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
         return tabela;
+    }
+    
+    public RegistroDeVendas pegaArquivo2() throws IOException{
+        try{
+            
+            BufferedReader br = new BufferedReader(new FileReader("registroVendas.json"));
+            tabela2 = gson.fromJson(br, RegistroDeVendas.class);
+        
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return tabela2;
     }
 }
