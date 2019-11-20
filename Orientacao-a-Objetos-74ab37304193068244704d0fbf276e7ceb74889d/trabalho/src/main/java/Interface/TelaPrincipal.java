@@ -54,6 +54,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+        imprimeTabela(listaProdutosVendidos, jTableControleDeVendas);
     }
 
     /**
@@ -1437,14 +1438,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public void imprimeTabela(RegistroDeVendas registroVendas, JTable tabela) {
         DefaultTableModel model = (DefaultTableModel) tabela.getModel();
 
-        for (int i = estoque.listaProdutos().size(); i > 0; i++) {
-            Object[] row = {produtoVendido.getId(),
-                        produtoVendido.getNome(),produtoVendido.getFornecedor(),
-                        produtoVendido.getQuantidade(),
-                        produtoVendido.getValor(),
-                        produtoVendido.getDescontoPorcentagem(),
-                        produtoVendido.getDescontoReais(),
-                        produtoVendido.getValorFinalVenda()};
+        for (int i=registroVendas.getListaVendas().size(); i>0; i--) {
+            Object[] row = {registroVendas.getListaVendas().get(i-1).getId(),
+                        registroVendas.getListaVendas().get(i-1).getNome(),registroVendas.getListaVendas().get(i-1).getFornecedor(),
+                        registroVendas.getListaVendas().get(i-1).getQuantidade(),
+                        registroVendas.getListaVendas().get(i-1).getValor(),
+                        registroVendas.getListaVendas().get(i-1).getDescontoPorcentagem(),
+                        registroVendas.getListaVendas().get(i-1).getDescontoReais(),
+                        registroVendas.getListaVendas().get(i-1).getValorFinalVenda()};
             model.addRow(row);
         }
     }
