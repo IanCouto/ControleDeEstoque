@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ Augusto Castilho Medeiros       Matrícula: 201876044
+ Ian Couto de Paula		Matrícula: 201876002
+ Matheus Henrique Rubio		Matrícula: 201876036
  */
 package Classes;
 
@@ -11,10 +11,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-/**
- *
- * @author Augusto
- */
 public class BancoVendas {
     RegistroDeVendas tabela;
     private Gson gson;
@@ -44,7 +40,6 @@ public class BancoVendas {
             writer.write(json);
             writer.close();
         } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -61,7 +56,6 @@ public class BancoVendas {
 
             tabela = gson.fromJson(br, RegistroDeVendas.class);
         } catch (IOException e) {
-            e.printStackTrace();
         }
         return tabela;
     }

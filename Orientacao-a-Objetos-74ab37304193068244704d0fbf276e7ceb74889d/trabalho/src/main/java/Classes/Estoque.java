@@ -1,6 +1,4 @@
 /*
-Álvaro Domingues de Freitas     Matrícula: 201876007
-Arthur Rodrigues Fernandes      Matrícula: 201835005
 Augusto Castilho Medeiros       Matrícula: 201876044
 Ian Couto de Paula		Matrícula: 201876002
 Matheus Henrique Rubio		Matrícula: 201876036
@@ -8,7 +6,7 @@ Matheus Henrique Rubio		Matrícula: 201876036
 package Classes;
 import java.util.ArrayList;
 /**
- * Classe responsável por criar um estoque de produtos.
+ * Classe que permite a criação de um estoque usando dois ArrayList, um para o estoque e o outro para o lixo.
  */
 public class Estoque {
     private final ArrayList<Produto> produtos;
@@ -24,15 +22,15 @@ public class Estoque {
     public void adicionaProduto(Produto produto){
         produtos.add(produto);
     }
-   /** Método que retorna o produto do índice correspondente
+   /** Método que retorna o produto do índice correspondente.
      * @param indice Posição do produto na lista.
-     * @return Produto localizado no indice recebido como parâmetro.
+     * @return Produto localizado no indice que foi recebido como parâmetro.
     */
     public Produto getProduto (int indice){
         return produtos.get(indice);
     }
     
-    /** Método que remove o produto no estoque com o nome correspondente.
+    /** Método que busca, pelo nome, um produto do estoque e remove a sua primeira ocorrência.
      * @param nome Nome do produto a ser removido.
      */
     public void removeProdutoNome(String nome){
@@ -40,11 +38,12 @@ public class Estoque {
             if(produtos.get(i).getNome().equals(nome)){
                 lixo.add(produtos.get(i));
                 produtos.remove(i);
+                break;
             }
         }
     }
 
-    /** Método que remove os produtos no estoque com a quantidade correspondente.
+    /** Método que busca, pelo nome, um produto do estoque e remove todas as ocorrências.
      * @param quantidade Parâmetro que verifica a quantidade de um produto no estoque.
      */
     public void removeProdutoQuantidade(Integer quantidade){
@@ -73,17 +72,18 @@ public class Estoque {
     }
     
     /**
-     * Método que recupera pro estoque todo conteúdo que se encontra na lixeira.
+     * Método que recupera para o estoque todo conteúdo que se encontra no lixo e limpa o lixo.
      */
     public void recuperaLixo(){
         produtos.clear();
         for (int i = 0; i < lixo.size(); i++) {
             produtos.add(lixo.get(i));
         }
+        lixo.clear();
     }
    
-    /** Método que retorna a lista de produtos.
-     * @return Lista de produtos
+    /** Método que retorna a lista de produtos no estoque.
+     * @return ArrayList<Produtos>
      */
     public ArrayList<Produto> listaProdutos(){
         return produtos;

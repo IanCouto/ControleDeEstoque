@@ -1,6 +1,4 @@
 /*
-Álvaro Domingues de Freitas     Matrícula: 201876007
-Arthur Rodrigues Fernandes      Matrícula: 201835005
 Augusto Castilho Medeiros       Matrícula: 201876044
 Ian Couto de Paula		Matrícula: 201876002
 Matheus Henrique Rubio		Matrícula: 201876036
@@ -13,10 +11,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-/**
- * @author Augusto
-
- */
 public class Banco {
 
     Estoque tabela;
@@ -42,12 +36,10 @@ public class Banco {
      */
     public void escreveArquivo() throws IOException {
         try {
-            
             FileWriter writer = new FileWriter("estoque.json");
             writer.write(json);
             writer.close();
         } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -59,9 +51,7 @@ public class Banco {
      */
     public Estoque pegaArquivo() throws IOException {
         try {
-            
             BufferedReader br = new BufferedReader(new FileReader("estoque.json"));
-
             tabela = gson.fromJson(br, Estoque.class);
         } catch (IOException e) {
             e.printStackTrace();

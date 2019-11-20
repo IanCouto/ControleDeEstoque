@@ -1,6 +1,4 @@
 /*
- Álvaro Domingues de Freitas     Matrícula: 201876007
- Arthur Rodrigues Fernandes      Matrícula: 201835005
  Augusto Castilho Medeiros       Matrícula: 201876044
  Ian Couto de Paula		 Matrícula: 201876002
  Matheus Henrique Rubio		 Matrícula: 201876036
@@ -8,7 +6,7 @@
 package Classes;
 
 /**
- * Usada para criar um produto.
+ * Classe que permite a criação de um produto.
  */
 public class Produto{
 
@@ -18,7 +16,7 @@ public class Produto{
     private Float preco;
     private String fornecedor;
     /**
-     * Construtor da classe Produto. inicia o objeto com todas as informações preenchidas.
+     * Construtor da classe Produto. inicia o objeto com as informações passadas como parâmetro.
      * @param nome Armazena o nome do produto.
      * @param quantidade Armazena a quatidade deste produto no estoque. (Mínimo == 0)
      * @param valor Armazena o valor do produto. (Mínimo == 0)
@@ -28,8 +26,8 @@ public class Produto{
     public Produto(String nome, int quantidade, float valor, String fornecedor, Integer id) {
         this.nome = nome;
         this.id = id;
-        this.quantidade = quantidade;
-        this.preco = valor;
+        if(quantidade >= 0) this.quantidade = quantidade;       
+        if(valor > 0) this.preco = valor;
         this.fornecedor = fornecedor;
     }
     /**

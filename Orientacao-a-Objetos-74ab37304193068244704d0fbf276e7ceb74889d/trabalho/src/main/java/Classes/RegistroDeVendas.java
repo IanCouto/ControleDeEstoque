@@ -1,15 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ Augusto Castilho Medeiros       Matrícula: 201876044
+ Ian Couto de Paula		Matrícula: 201876002
+ Matheus Henrique Rubio		Matrícula: 201876036
  */
 package Classes;
 import java.util.ArrayList;
 
-/**
- *
- * @author Ian Couto
- */
 public class RegistroDeVendas {
     private final ArrayList<ProdutoVendido> vendas;
 
