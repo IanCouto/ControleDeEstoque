@@ -1452,6 +1452,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void botaoLimpaRegistroDeVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLimpaRegistroDeVendasActionPerformed
         limpaTabela(jTableControleDeVendas);
+        listaProdutosVendidos = new RegistroDeVendas();
         atualizaJsonVendas(listaProdutosVendidos);
     }//GEN-LAST:event_botaoLimpaRegistroDeVendasActionPerformed
 
