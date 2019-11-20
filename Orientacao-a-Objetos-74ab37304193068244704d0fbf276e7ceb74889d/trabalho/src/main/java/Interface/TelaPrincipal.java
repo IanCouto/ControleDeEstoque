@@ -49,6 +49,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         imprimeTabela(estoque, jTableEstoque);
         
         vendas = new BancoVendas(listaProdutosVendidos);
+        try {
+            listaProdutosVendidos = vendas.pegaArquivo();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     /**
