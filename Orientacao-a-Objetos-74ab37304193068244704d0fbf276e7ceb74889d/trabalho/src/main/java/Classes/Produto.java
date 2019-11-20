@@ -5,7 +5,7 @@
  Ian Couto de Paula		 Matrícula: 201876002
  Matheus Henrique Rubio		 Matrícula: 201876036
  */
-package com.mycompany.aplicacao;
+package Classes;
 
 /**
  * Usada para criar um produto.

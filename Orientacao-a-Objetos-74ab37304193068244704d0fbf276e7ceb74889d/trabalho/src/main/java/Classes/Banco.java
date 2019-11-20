@@ -5,7 +5,7 @@ Augusto Castilho Medeiros       Matrícula: 201876044
 Ian Couto de Paula		Matrícula: 201876002
 Matheus Henrique Rubio		Matrícula: 201876036
  */
-package com.mycompany.aplicacao;
+package Classes;
 
 import com.google.gson.Gson;
 import java.io.BufferedReader;
