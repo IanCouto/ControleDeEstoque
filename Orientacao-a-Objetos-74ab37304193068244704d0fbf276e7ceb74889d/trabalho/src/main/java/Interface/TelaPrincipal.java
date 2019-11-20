@@ -1079,7 +1079,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         if (JOptionPane.showConfirmDialog(null, "Deseja finalizar a venda?", "Venda", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION) {
             //variávei recebem o texto digitado
             String nomeProduto = buscaProdutoNomeTxt.getText();
-            Integer id = Integer.parseInt(buscaProdutoIdTxt.getText());
+            Integer id = 0;
+            if (!buscaProdutoIdTxt.getText().isEmpty()) {
+                id = Integer.parseInt(buscaProdutoIdTxt.getText());
+            }
             if(nomeProduto.isEmpty() && id.toString().isEmpty()){
                 JOptionPane.showMessageDialog(precoTxt, "Produto não encontrado. A venda não pode ser concluida.");
             }
