@@ -1055,6 +1055,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             descontoPorcentagemTxt.setText("");
             descontoReaisTxt.setText("");
             atualizaJson(estoque);
+            atualizaJsonVendas(listaProdutosVendidos);
         }
     }
     
@@ -1467,6 +1468,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
      */
     public void atualizaJson(Estoque estoque) {
         Banco banco = new Banco(estoque);
+        try {
+            banco.escreveArquivo();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public void atualizaJsonVendas(RegistroDeVendas vendas){
+        BancoVendas banco = new BancoVendas(vendas);
         try {
             banco.escreveArquivo();
         } catch (IOException ex) {
