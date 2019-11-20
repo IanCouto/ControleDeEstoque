@@ -15,8 +15,6 @@ import com.mycompany.aplicacao.ProdutoVendido;
 import com.mycompany.aplicacao.Estoque;
 import com.mycompany.aplicacao.RegistroDeVendas;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JTable;
 
 public class TelaPrincipal extends javax.swing.JFrame {
@@ -47,14 +45,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         imprimeTabela(estoque, jTableEstoque);
-
-        banco = new Banco(listaProdutosVendidos);
-        try {
-        listaProdutosVendidos = banco.pegaArquivo2();
-        } catch (IOException ex) {
-        ex.printStackTrace();
-        }
-        imprimeTabela(listaProdutosVendidos, jTableControleDeVendas);
     }
 
     /**
@@ -958,7 +948,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     /**
      * Método para mostrar a aba Sobre.
-     *
      * @param evt - Evento que aciona a função.
      */
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -978,9 +967,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         JOptionPane.showConfirmDialog(null, "jButton2");
     }//GEN-LAST:event_jButton2ActionPerformed
-    /**
-     * Método que restaura para o estoque todos os produtos que foram excluídos
-     * e permaneceram na lixeira.
+    /** 
+     * Método que restaura para o estoque todos os produtos que foram excluídos e permaneceram na lixeira.
      */
     private void botaoRecuperaLixeiraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRecuperaLixeiraActionPerformed
         int limpar;
@@ -992,13 +980,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
             atualizaJson(estoque);
         }
     }//GEN-LAST:event_botaoRecuperaLixeiraActionPerformed
-
+    
+    
     /**
-     * Método que adiciona o produto ao estoque.
-     *
-     * @throws Exception
-     */
-    private void adicionarProtudobuttonActionPerformed() throws Exception {
+     * Método que adiciona o produto ao estoque. 
+     * @throws Exception 
+    */
+    private void adicionarProtudobuttonActionPerformed () throws Exception{
         for (int i = 0; i < (estoque.listaProdutos().size()); i++) {
             if (produtoTxt.getText().equals(estoque.getProduto(i).getNome())) {
                 JOptionPane.showMessageDialog(null, "Produto já cadastrado em sistema, apenas altere a quantidade.");
@@ -1021,7 +1009,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     throw new Exception();
                 }
             }
-            produto = new Produto(produtoTxt.getText(), quantidadeTxt.getSelectedIndex() + 1, Float.parseFloat(precoTxt.getText()), fornecedorTxt.getText(), estoque.listaProdutos().size() + 1);
+            produto = new Produto(produtoTxt.getText(), quantidadeTxt.getSelectedIndex()+1,Float.parseFloat(precoTxt.getText()), fornecedorTxt.getText(), estoque.listaProdutos().size() + 1);
             estoque.adicionaProduto(produto);
             String nome = estoque.getProduto(estoque.listaProdutos().size() - 1).getNome();
             String fornecedor = estoque.getProduto(estoque.listaProdutos().size() - 1).getFornecedor();
@@ -1032,12 +1020,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
             model.addRow(row);
             atualizaJson(estoque);
         }
-        fornecedorTxt.setText("" + Math.random());
-        produtoTxt.setText("" + Math.random());
-        precoTxt.setText("" + Math.random());
-    }
-
-    /**
+        fornecedorTxt.setText(""+Math.random());
+        produtoTxt.setText(""+Math.random());
+        precoTxt.setText(""+Math.random());
+    }    
+    /** 
      * Método responsável por limpar todo o estoque.
      */
     private void botaoLimpaEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLimpaEstoqueActionPerformed
@@ -1051,7 +1038,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             atualizaJson(estoque);
         }
     }//GEN-LAST:event_botaoLimpaEstoqueActionPerformed
-
+    
     /**
      * Método que limpa todos os arquivos que se encontram na lixeira.
      */
@@ -1072,7 +1059,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_buscaProdutoNomeTxtActionPerformed
 
-    /**
+    /** 
      * Método que registra a venda de um produto do estoque.
      */
     private void registraVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registraVendaActionPerformed
@@ -1080,61 +1067,56 @@ public class TelaPrincipal extends javax.swing.JFrame {
             registraVendaActionPerformed();
         } catch (Exception ex) {
         }
-        try {
-            banco.escreveArquivo("registroVendas");
-        } catch (IOException ex) {
-        }
     }//GEN-LAST:event_registraVendaActionPerformed
-
-    /**
+    
+    /** 
      * Método que registra a venda de um produto do estoque.
-     *
      * @throws Exception
      */
-    private void registraVendaActionPerformed() throws Exception {
-        int confirm = JOptionPane.showConfirmDialog(null, "Deseja finalizar a venda?", "Venda", JOptionPane.OK_CANCEL_OPTION), exception = 0;
+    private void registraVendaActionPerformed()throws Exception{
+        int  exception = 0;
         DefaultTableModel model = (DefaultTableModel) jTableControleDeVendas.getModel();
-        if (confirm == JOptionPane.OK_OPTION) {
+        if (JOptionPane.showConfirmDialog(null, "Deseja finalizar a venda?", "Venda", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION) {
             //variávei recebem o texto digitado
             String nomeProduto = buscaProdutoNomeTxt.getText();
-            if (nomeProduto.isEmpty()) {
+            Integer id = Integer.parseInt(buscaProdutoIdTxt.getText());
+            if(nomeProduto.isEmpty() && id.toString().isEmpty()){
                 JOptionPane.showMessageDialog(precoTxt, "Produto não encontrado. A venda não pode ser concluida.");
             }
-            Integer id = Integer.parseInt(buscaProdutoNomeTxt.getText());
-            Integer quantidadeVendida = Integer.parseInt(quantidadeVenda.getSelectedItem().toString());
+            Integer quantidadeVendida = quantidadeVenda.getSelectedIndex();
             //verifica, para todo o estoque se o produto procurado existe
             for (int i = 0; i <= estoque.listaProdutos().size(); i++) {
                 //se encontrar e a quantidade em estoque for maior que a vendida, a venda é concluida
-                if ((!nomeProduto.isEmpty() && estoque.getProduto(i).getNome().contains(nomeProduto)
-                        || id.toString().contains(estoque.getProduto(i).getId().toString()))) {
+                if ((!nomeProduto.isEmpty() && estoque.getProduto(i).getNome().contains(nomeProduto) ||
+                        id.toString().contains(estoque.getProduto(i).getId().toString()))) {
                     if (estoque.getProduto(i).getQuantidade() < quantidadeVendida) {
                         JOptionPane.showMessageDialog(precoTxt, "Quantidade em estoque insuficiente. A venda não pode ser concluida.");
                         throw new Exception();
-                    } else {
+                    }else{
                         for (int j = 0; j < descontoPorcentagemTxt.getText().length(); j++) {
-                            if (descontoPorcentagemTxt.getText().charAt(j) == ".".charAt(0)) {
-                                exception++;
+                            if(descontoPorcentagemTxt.getText().charAt(j) == ".".charAt(0)){
+                                exception ++;
                             }
-                            if ((descontoPorcentagemTxt.getText().charAt(j) < "0".charAt(0)
-                                    || descontoPorcentagemTxt.getText().charAt(j) > "9".charAt(0))
-                                    && descontoPorcentagemTxt.getText().charAt(j) != ".".charAt(0)
-                                    || exception > 1
-                                    || descontoReaisTxt.getText().charAt(0) == ".".charAt(0)
-                                    || descontoReaisTxt.getText().charAt(descontoReaisTxt.getText().length() - 1) == ".".charAt(0)) {
+                            if ((descontoPorcentagemTxt.getText().charAt(j) < "0".charAt(0) || 
+                                    descontoPorcentagemTxt.getText().charAt(j) > "9".charAt(0)) &&
+                                    descontoPorcentagemTxt.getText().charAt(j) != ".".charAt(0) ||  
+                                    exception > 1 ||
+                                    descontoReaisTxt.getText().charAt(0) == ".".charAt(0) ||
+                                    descontoReaisTxt.getText().charAt(descontoReaisTxt.getText().length()-1) == ".".charAt(0)) {
                                 JOptionPane.showMessageDialog(null, "O desconto inserido possui formato inválido.\nExemplo de formato correto: 25.30");
                                 throw new Exception();
-                            }
+                             }
                         }
                         for (int j = 0; j < descontoReaisTxt.getText().length(); j++) {
-                            if ((descontoReaisTxt.getText().charAt(j) < "0".charAt(0)
-                                    || descontoReaisTxt.getText().charAt(j) > "9".charAt(0))
-                                    && descontoReaisTxt.getText().charAt(j) != ".".charAt(0)
-                                    || exception > 1
-                                    || descontoReaisTxt.getText().charAt(0) == ".".charAt(0)
-                                    || descontoReaisTxt.getText().charAt(descontoReaisTxt.getText().length() - 1) == ".".charAt(0)) {
+                            if ((descontoReaisTxt.getText().charAt(j) < "0".charAt(0) ||
+                                   descontoReaisTxt.getText().charAt(j) > "9".charAt(0)) &&
+                                    descontoReaisTxt.getText().charAt(j) != ".".charAt(0) || 
+                                    exception > 1 ||
+                                    descontoReaisTxt.getText().charAt(0) == ".".charAt(0) ||
+                                    descontoReaisTxt.getText().charAt(descontoReaisTxt.getText().length()-1) == ".".charAt(0)) {
                                 JOptionPane.showMessageDialog(null, "O desconto inserido possui formato inválido.\nExemplo de formato correto: 25.30");
                                 throw new Exception();
-                            }
+                             }
                         }
                     }
                     //atualiza a qauntidade em estoque e a tabela do estoque
@@ -1148,13 +1130,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     produtoVendido.setQuantidade(quantidadeVendida);
                     produtoVendido.setFornecedor(estoque.getProduto(i).getFornecedor());
                     produtoVendido.setValor(estoque.getProduto(i).getValor());
-                    if (!descontoPorcentagemTxt.getText().equals("")) {
+                    if(!descontoPorcentagemTxt.getText().equals("")){
                         produtoVendido.setDescontoPorcentagem(Float.parseFloat(descontoPorcentagemTxt.getText()));
                     }
-                    if (!descontoReaisTxt.getText().equals("")) {
+                    if(!descontoReaisTxt.getText().equals("")){
                         produtoVendido.setDescontoReais(Float.parseFloat(descontoReaisTxt.getText()));
                     }
-                    produtoVendido.setValorFinalVenda(quantidadeVendida * (produtoVendido.getValor() - produtoVendido.getDescontoReais()));
+                    produtoVendido.setValorFinalVenda(quantidadeVendida*(produtoVendido.getValor()-produtoVendido.getDescontoReais()));
                     //adiciona produto criado na lista de produtos vendidos
                     listaProdutosVendidos.adicionaVenda(produtoVendido);
                     //cria objeto linha com as informações do produto vendido
@@ -1177,8 +1159,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
             atualizaJson(estoque);
         }
     }
-
-    private void imprimeBuscaEstoque() throws Exception {
+    
+   
+    private void imprimeBuscaEstoque()throws Exception{
         int k = 0;
         aux.limpaEstoque();
         limpaTabela(jTableEditarProduto);
@@ -1211,10 +1194,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         }
     }
-
-    /**
-     * Método que após realizada a edição do produto selecionado devolve ele ao
-     * estoque.
+    
+    /** 
+     * Método que após realizada a edição do produto selecionado devolve ele ao estoque.
      */
     private void botaoAdicionarEdicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAdicionarEdicaoActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTableEditarProduto.getModel();
@@ -1249,7 +1231,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel2KeyTyped
 
     private void jPanel2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel2KeyPressed
-        if (java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))) {
+        if(java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))){
             try {
                 adicionarProtudobuttonActionPerformed();
             } catch (Exception ex) {
@@ -1258,7 +1240,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel2KeyPressed
 
     private void quantidadeTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_quantidadeTxtKeyPressed
-        if (java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))) {
+        if(java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))){
             try {
                 adicionarProtudobuttonActionPerformed();
             } catch (Exception ex) {
@@ -1267,7 +1249,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_quantidadeTxtKeyPressed
 
     private void produtoTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_produtoTxtKeyPressed
-        if (java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))) {
+        if(java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))){
             try {
                 adicionarProtudobuttonActionPerformed();
             } catch (Exception ex) {
@@ -1284,7 +1266,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_fornecedorTxtKeyTyped
 
     private void fornecedorTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fornecedorTxtKeyPressed
-        if (java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))) {
+        if(java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))){
             try {
                 adicionarProtudobuttonActionPerformed();
             } catch (Exception ex) {
@@ -1297,7 +1279,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_fornecedorTxtActionPerformed
 
     private void precoTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_precoTxtKeyPressed
-        if (java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))) {
+        if(java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))){
             try {
                 adicionarProtudobuttonActionPerformed();
             } catch (Exception ex) {
@@ -1310,7 +1292,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_adicionarProtudobuttonKeyTyped
 
     private void adicionarProtudobuttonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_adicionarProtudobuttonKeyPressed
-        if (java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))) {
+        if(java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))){
             try {
                 adicionarProtudobuttonActionPerformed();
             } catch (Exception ex) {
@@ -1318,9 +1300,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_adicionarProtudobuttonKeyPressed
 
-    /**
-     * Método que adiciona o produto ao estoque.
-     */
+    /**Método que adiciona o produto ao estoque. 
+    */
     private void adicionarProtudobuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarProtudobuttonActionPerformed
         try {
             adicionarProtudobuttonActionPerformed();
@@ -1332,46 +1313,46 @@ public class TelaPrincipal extends javax.swing.JFrame {
         try {
             imprimeBuscaEstoque();
         } catch (Exception ex) {
-        }
+        }           
     }//GEN-LAST:event_buscaNomeKeyPressed
 
     private void buscaIdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscaIdKeyPressed
-        if (java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))) {
+        if(java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))){
             try {
                 imprimeBuscaEstoque();
             } catch (Exception ex) {
-            }
+            }   
         }
     }//GEN-LAST:event_buscaIdKeyPressed
 
     private void buscarQuantidadeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarQuantidadeKeyPressed
-        if (java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))) {
+        if(java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))){
             try {
                 imprimeBuscaEstoque();
             } catch (Exception ex) {
-            }
+            }   
         }
     }//GEN-LAST:event_buscarQuantidadeKeyPressed
 
     private void buscarPrecoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarPrecoKeyPressed
-        if (java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))) {
+        if(java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))){
             try {
                 imprimeBuscaEstoque();
             } catch (Exception ex) {
-            }
+            }   
         }
     }//GEN-LAST:event_buscarPrecoKeyPressed
 
     private void buscarFornecedorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarFornecedorKeyPressed
-        if (java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))) {
+        if(java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))){
             try {
                 imprimeBuscaEstoque();
             } catch (Exception ex) {
-            }
+            }   
         }
     }//GEN-LAST:event_buscarFornecedorKeyPressed
 
-    private void imprimeBuscaTabelaVendas() {
+    private void imprimeBuscaTabelaVendas(){
         aux.limpaEstoque();
         limpaTabela(jTableRegistraVenda);
         DefaultTableModel model = (DefaultTableModel) jTableRegistraVenda.getModel();
@@ -1390,53 +1371,53 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         }
     }
-
+    
     private void buscaProdutoNomeTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscaProdutoNomeTxtKeyPressed
-        if (java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))) {
+        if(java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))){
             try {
                 registraVendaActionPerformed();
             } catch (Exception ex) {
-            }
-        } else {
+            }   
+        }else{
             imprimeBuscaTabelaVendas();
         }
-
+        
     }//GEN-LAST:event_buscaProdutoNomeTxtKeyPressed
-
+    
     private void descontoReaisTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_descontoReaisTxtKeyPressed
-        if (java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))) {
+        if(java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))){
             try {
                 registraVendaActionPerformed();
             } catch (Exception ex) {
-            }
+            }   
         }
     }//GEN-LAST:event_descontoReaisTxtKeyPressed
 
     private void descontoPorcentagemTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_descontoPorcentagemTxtKeyPressed
-        if (java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))) {
+        if(java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))){
             try {
                 registraVendaActionPerformed();
             } catch (Exception ex) {
-            }
+            }   
         }
     }//GEN-LAST:event_descontoPorcentagemTxtKeyPressed
 
     private void registraVendaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_registraVendaKeyPressed
-        if (java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))) {
+        if(java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))){
             try {
                 registraVendaActionPerformed();
             } catch (Exception ex) {
-            }
+            }   
         }
     }//GEN-LAST:event_registraVendaKeyPressed
 
     private void buscaProdutoNomeTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscaProdutoNomeTxtKeyReleased
-        if (java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))) {
+        if(java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))){
             try {
                 registraVendaActionPerformed();
             } catch (Exception ex) {
-            }
-        } else {
+            }   
+        }else{
             imprimeBuscaTabelaVendas();
         }
     }//GEN-LAST:event_buscaProdutoNomeTxtKeyReleased
@@ -1445,7 +1426,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         try {
             imprimeBuscaEstoque();
         } catch (Exception ex) {
-        }
+        }   
     }//GEN-LAST:event_buscaNomeKeyReleased
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -1461,23 +1442,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_buscaProdutoIdTxtActionPerformed
 
     private void buscaProdutoIdTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscaProdutoIdTxtKeyPressed
-        if (java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))) {
+        if(java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))){
             try {
                 registraVendaActionPerformed();
             } catch (Exception ex) {
-            }
-        } else {
+            }   
+        }else{
             imprimeBuscaTabelaVendas();
         }
     }//GEN-LAST:event_buscaProdutoIdTxtKeyPressed
 
     private void buscaProdutoIdTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscaProdutoIdTxtKeyReleased
-        if (java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))) {
+        if(java.awt.event.KeyEvent.getKeyText(java.awt.event.KeyEvent.VK_ENTER).equals(java.awt.event.KeyEvent.getKeyText(evt.getKeyCode()))){
             try {
                 registraVendaActionPerformed();
             } catch (Exception ex) {
-            }
-        } else {
+            }   
+        }else{
             imprimeBuscaTabelaVendas();
         }
     }//GEN-LAST:event_buscaProdutoIdTxtKeyReleased
@@ -1486,14 +1467,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         try {
             imprimeBuscaEstoque();
         } catch (Exception ex) {
-        }
+        } 
     }//GEN-LAST:event_buscaIdKeyReleased
 
     private void buscarQuantidadeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarQuantidadeKeyReleased
         try {
             imprimeBuscaEstoque();
         } catch (Exception ex) {
-        }
+        } 
     }//GEN-LAST:event_buscarQuantidadeKeyReleased
 
     private void buscarPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarPrecoActionPerformed
@@ -1504,30 +1485,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
         try {
             imprimeBuscaEstoque();
         } catch (Exception ex) {
-        }
+        } 
     }//GEN-LAST:event_buscarPrecoKeyReleased
 
     private void buscarFornecedorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarFornecedorKeyReleased
         try {
             imprimeBuscaEstoque();
         } catch (Exception ex) {
-        }
+        } 
     }//GEN-LAST:event_buscarFornecedorKeyReleased
 
-    /**
-     * Método que limpa tabelas.
-     *
+    /** Método que limpa tabelas.
      * @param tabela Tabela que será limpa
      */
-    public void limpaTabela(JTable tabela) {
-        for (DefaultTableModel model = (DefaultTableModel) tabela.getModel(); tabela.getRowCount() > 0; model.removeRow(tabela.getRowCount() - 1)) {
-        }
+    public void limpaTabela(JTable tabela) {        
+        for (DefaultTableModel model = (DefaultTableModel) tabela.getModel(); tabela.getRowCount() > 0; model.removeRow(tabela.getRowCount() - 1)){}
     }
 
-    /**
-     * Método que imprime a tabela de acordo com os produtos disponíveis em
-     * estoque.
-     *
+    /** Método que imprime a tabela de acordo com os produtos disponíveis em estoque.
      * @param estoque Estoque que será impresso na tabela.
      * @param tabela Tabela que receberá os produtos do estoque.
      */
@@ -1545,10 +1520,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
             j++;
         }
     }
-
+    
     /**
      * Método para imprimir uma tabela de acordo com o registro de vendas.
-     *
      * @param registroVendas Registro de vendas que será impresso na tabela
      * @param tabela Tabela que receberá todo o registro de vendas.
      */
@@ -1557,19 +1531,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         for (int i = estoque.listaProdutos().size(); i > 0; i++) {
             Object[] row = {produtoVendido.getId(),
-                produtoVendido.getNome(), produtoVendido.getFornecedor(),
-                produtoVendido.getQuantidade(),
-                produtoVendido.getValor(),
-                produtoVendido.getDescontoPorcentagem(),
-                produtoVendido.getDescontoReais(),
-                produtoVendido.getValorFinalVenda()};
+                        produtoVendido.getNome(),produtoVendido.getFornecedor(),
+                        produtoVendido.getQuantidade(),
+                        produtoVendido.getValor(),
+                        produtoVendido.getDescontoPorcentagem(),
+                        produtoVendido.getDescontoReais(),
+                        produtoVendido.getValorFinalVenda()};
             model.addRow(row);
         }
     }
-
-    /**
-     * Método que atualiza uma tabela após alguma alteração no estoque.
-     *
+    
+    /** Método que atualiza uma tabela após alguma alteração no estoque.
      * @param tabela Tabela que será atualizada.
      * @param estoque Estoque que irá ser adicionado na tabela.
      */
@@ -1577,11 +1549,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         limpaTabela(tabela);
         imprimeTabela(estoque, tabela);
     }
-
+    
     /**
-     * Método que atualiza uma tabela após alguma alteração no registro de
-     * vendas.
-     *
+     * Método que atualiza uma tabela após alguma alteração no registro de vendas.
      * @param tabela Tabela que será atualizada.
      * @param vendas Registro de vendas que irá ser adicionado na tabela.
      */
@@ -1590,32 +1560,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
         imprimeTabela(vendas, tabela);
     }
 
-    /**
-     * Método que realiza a atualização do arquivo .Json
-     *
-     * @param estoque
+    /** Método que realiza a atualização do arquivo .Json
+     * @param estoque     
      */
     public void atualizaJson(Estoque estoque) {
         Banco banco = new Banco(estoque);
         try {
-            banco.escreveArquivo("estoque");
+            banco.escreveArquivo();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
-    public void atualizaJsonVendas(RegistroDeVendas listaProdutosVendidos) {
-        Banco banco = new Banco(listaProdutosVendidos);
-        try {
-            banco.escreveArquivo("registroVendas");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    /**
-     * Método principal do projeto
-     *
+    /** Método principal do projeto
      * @param args
      */
     public static void main(String args[]) {
