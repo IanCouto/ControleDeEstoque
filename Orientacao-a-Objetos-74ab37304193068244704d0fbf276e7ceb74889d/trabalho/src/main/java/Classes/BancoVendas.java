@@ -1,9 +1,7 @@
 /*
-Álvaro Domingues de Freitas     Matrícula: 201876007
-Arthur Rodrigues Fernandes      Matrícula: 201835005
-Augusto Castilho Medeiros       Matrícula: 201876044
-Ian Couto de Paula		Matrícula: 201876002
-Matheus Henrique Rubio		Matrícula: 201876036
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package Classes;
 
@@ -14,12 +12,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
+ *
  * @author Augusto
-
  */
-public class Banco {
-
-    Estoque tabela;
+public class BancoVendas {
+    RegistroDeVendas tabela;
     private Gson gson;
 
     // converte objetos Java para JSON
@@ -27,11 +24,11 @@ public class Banco {
 
     /**
      * Construtor da classe Banco
-     * @param estoque - Recebe o estoque
+     * @param vendas - Recebe o registro das vendas
      */
-    public Banco(Estoque estoque) {
-        tabela = new Estoque();
-        tabela = estoque;
+    public BancoVendas(RegistroDeVendas vendas) {
+        tabela = new RegistroDeVendas();
+        tabela = vendas;
         gson = new Gson();
         json = gson.toJson(tabela);
     }
@@ -43,7 +40,7 @@ public class Banco {
     public void escreveArquivo() throws IOException {
         try {
             
-            FileWriter writer = new FileWriter("estoque.json");
+            FileWriter writer = new FileWriter("registroVendas.json");
             writer.write(json);
             writer.close();
         } catch (IOException e) {
@@ -57,12 +54,12 @@ public class Banco {
      * @throws IOException - precaução para casos de erros de leitura de
      * arquivos
      */
-    public Estoque pegaArquivo() throws IOException {
+    public RegistroDeVendas pegaArquivo() throws IOException {
         try {
             
-            BufferedReader br = new BufferedReader(new FileReader("estoque.json"));
+            BufferedReader br = new BufferedReader(new FileReader("registroVendas.json"));
 
-            tabela = gson.fromJson(br, Estoque.class);
+            tabela = gson.fromJson(br, RegistroDeVendas.class);
         } catch (IOException e) {
             e.printStackTrace();
         }

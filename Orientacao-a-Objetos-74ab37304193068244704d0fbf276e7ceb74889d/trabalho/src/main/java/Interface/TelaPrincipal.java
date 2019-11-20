@@ -9,6 +9,7 @@ package Interface;
 
 import javax.swing.JOptionPane;
 import Classes.Banco;
+import Classes.BancoVendas;
 import javax.swing.table.DefaultTableModel;
 import Classes.Produto;
 import Classes.ProdutoVendido;
@@ -26,6 +27,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     Estoque aux;
     private Object jDesktopPane;
     Banco banco;
+    BancoVendas vendas;
 
     /**
      * Construtor da interface TelaPrincipal.
@@ -37,7 +39,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         produtoVendido = new ProdutoVendido();
         listaProdutosVendidos = new RegistroDeVendas();
         aux = new Estoque();
-        banco = new Banco(estoque);
+        banco = new Banco(estoque);                
 
         try {
             estoque = banco.pegaArquivo();
@@ -45,6 +47,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         imprimeTabela(estoque, jTableEstoque);
+        
+        vendas = new BancoVendas(listaProdutosVendidos);
     }
 
     /**
