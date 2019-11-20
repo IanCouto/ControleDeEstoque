@@ -40,4 +40,7 @@ public class RegistroDeVendas {
     public ArrayList<ProdutoVendido> getListaVendas(){
         return vendas;
     }
+    public void limpaVendas(){
+        vendas.clear();
+    }
 }

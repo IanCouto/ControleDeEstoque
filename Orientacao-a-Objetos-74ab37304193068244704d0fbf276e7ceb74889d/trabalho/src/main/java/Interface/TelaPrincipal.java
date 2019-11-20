@@ -583,7 +583,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
 
         descontoReaisTxt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        descontoReaisTxt.setText("0");
         descontoReaisTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 descontoReaisTxtActionPerformed(evt);
@@ -596,7 +595,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
 
         descontoPorcentagemTxt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        descontoPorcentagemTxt.setText("0");
         descontoPorcentagemTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 descontoPorcentagemTxtActionPerformed(evt);
@@ -1050,10 +1048,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     if(!descontoPorcentagemTxt.getText().equals("")){
                         produtoVendido.setDescontoPorcentagem(Float.parseFloat(descontoPorcentagemTxt.getText()));
                         produtoVendido.setValorFinalVenda(quantidadeVendida*(produtoVendido.getValor()-produtoVendido.getDescontoReais()));
-                    }
-                    if(!descontoReaisTxt.getText().equals("")){
-                        produtoVendido.setDescontoReais(Float.parseFloat(descontoReaisTxt.getText()));
-                        produtoVendido.setValorFinalVenda (quantidadeVendida*(produtoVendido.getValor()*(produtoVendido.getDescontoPorcentagem()/100)));
+                    }else if (!descontoReaisTxt.getText().equals("")) {
+                            produtoVendido.setDescontoReais(Float.parseFloat(descontoReaisTxt.getText()));
+                            produtoVendido.setValorFinalVenda(quantidadeVendida * (produtoVendido.getValor() * (produtoVendido.getDescontoPorcentagem() / 100)));
+                    }else{
+                        produtoVendido.setValorFinalVenda(quantidadeVendida*produtoVendido.getValor());
                     }
                     
                     //adiciona produto criado na lista de produtos vendidos
@@ -1452,7 +1451,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void botaoLimpaRegistroDeVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLimpaRegistroDeVendasActionPerformed
         limpaTabela(jTableControleDeVendas);
-        listaProdutosVendidos = new RegistroDeVendas();
+        listaProdutosVendidos.limpaVendas();
         atualizaJsonVendas(listaProdutosVendidos);
     }//GEN-LAST:event_botaoLimpaRegistroDeVendasActionPerformed
 
