@@ -1,5 +1,6 @@
 /*
- Augusto Castilho Medeiros       Matrícula: 201876044
+ Álvaro Domingues de Freitas    Matrícula: 201876007
+ Augusto Castilho Medeiros      Matrícula: 201876044
  Ian Couto de Paula		Matrícula: 201876002
  Matheus Henrique Rubio		Matrícula: 201876036
  */
