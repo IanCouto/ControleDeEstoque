@@ -37,7 +37,7 @@ public class Banco {
      */
     public void escreveArquivo() throws IOException {
         try {
-            FileWriter writer = new FileWriter("estoque.json");
+            FileWriter writer = new FileWriter("biblioteca.json");
             writer.write(json);
             writer.close();
         } catch (IOException e) {
